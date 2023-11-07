@@ -1,0 +1,139 @@
+<breadcrumb></breadcrumb>
+
+<form class="form-horizontal form-material" id="RoleAccessForm" 
+[formGroup]="RoleAccessForm">
+<div class="row">
+    <div class="col-12">
+        <div class="parent">
+            <div class="div1">
+                <h2>
+                    Role Access
+                </h2> </div>
+            <div class="div2 col-md-12"> 
+                
+                    <!-- <mat-form-field class="example-full-width">
+                        <mat-label>Company</mat-label>
+                        <mat-select formControlName="Company" [(value)]="selected" (selectionChange)="GetList($event.value)">
+                          <mat-option>Select One</mat-option>
+                          <mat-option *ngFor="let Company of Company_List" [value]="Company.CompId">
+                            {{ Company.CompanyName }}
+                          </mat-option>
+                        </mat-select>
+                        <mat-error>
+                            Company is required
+                        </mat-error>
+                      </mat-form-field> -->
+
+                      <mat-form-field class="example-full-width">
+                        <input autocomplete="off" readonly matInput placeholder="Company" formControlName="Company1" autocomplete="off" />                   
+                      </mat-form-field>
+                      
+                  
+            </div>
+            <div class="div3 col-md-12"> 
+              <mat-form-field class="example-full-width">
+                <mat-label>Role</mat-label>
+                <mat-select formControlName="role" [(value)]="selected1" (selectionChange)="CheckList($event.value)" >
+                  <mat-option>Select One</mat-option>
+                  <mat-option *ngFor="let role of Role_List" [value]="role.RoleId">
+                    {{ role.Roles }}
+                  </mat-option>
+                </mat-select>
+                <mat-error>
+                  Role is required
+                </mat-error>
+              </mat-form-field>
+            </div>
+            </div>
+
+            
+         
+        </div>
+        </div>
+<br>
+        <div class="row" *ngIf="GetListcount>1">
+            
+                <!-- <div class="col-md-12 example-container">
+                   
+                      <table id="par-list-tab" formArrayName="AccessList">
+                        <thead>
+                          <tr>
+                            <th class="mat-h3 bck-grnd-clr">Select</th>
+                            
+                            <th class="mat-h3 bck-grnd-clr">Module Name</th>
+                  
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr [formGroupName]="i" *ngFor="let Role_Items of AccessList_Control.controls; let i = index">             
+                                 
+                            <td>
+                                <section class="example-section"   class="col-md-12">
+                                    <mat-checkbox    class="example-margin"  [checked]=false (change)="onChange_CV(Role_Items.value['ModId'],$event,i)">
+                                       </mat-checkbox>
+                                  </section>
+                            </td>
+                           
+                            <td>                        
+                                <span>
+                                  {{ Role_Items.value['ModName'] }} 
+                                </span>
+                                </td>
+                               
+                          </tr>
+                        </tbody>
+                      </table>
+                     
+                   
+                  
+            </div> -->
+
+            <div class="example-container" >
+              <mat-table #table [dataSource]="dataSource" matSort class="table" >
+                        <br> 
+                        <ng-container matColumnDef="select">
+                          <mat-header-cell *matHeaderCellDef class="mat-header"> select </mat-header-cell>
+                          <mat-cell *matCellDef="let row; let i = index;">
+                              <ng-container>
+                                <mat-checkbox 
+                              
+                                [checked]="row.select"
+                                (change)="onChange($event,row.MenuId,i); false"      
+                               > 
+                                </mat-checkbox>
+                              </ng-container>
+                          </mat-cell>
+                      </ng-container>
+
+                <ng-container matColumnDef="ModName">
+                  <mat-header-cell *matHeaderCellDef class="mat-header" > Module Name </mat-header-cell>
+                  <mat-cell *matCellDef="let element" > {{element.ModName}} </mat-cell>
+                </ng-container>
+          
+                <mat-header-row *matHeaderRowDef="displayedColumns sticky: true" ></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+              </mat-table>   
+              <br>
+              <div class="text-center  equlist" *ngIf="this.role_count===0" 
+              style="background: white;height: 35px;color:red">
+              <span>No Records Found...</span>
+            </div>
+            </div> 
+        </div>
+
+        <div>
+            <table style="float: right;">
+                <tr>
+                    <td>  <button type="submit" class="btn btn-sm btn-success" (click)="Post_roleAcess();"><i class="fa fa-dot-circle-o"></i>
+                       Save</button></td>
+                    <td>  
+                        <!-- <button type="button" [routerLink]="['/company/company-master']" 
+                        class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Cancel</button> -->
+                    </td>
+                </tr>
+            </table>
+        
+        
+        </div>
+
+</form>

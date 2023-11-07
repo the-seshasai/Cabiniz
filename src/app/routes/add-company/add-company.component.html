@@ -1,0 +1,189 @@
+
+<breadcrumb></breadcrumb>
+  <div class="row">    
+    <div class="col-sm-12">
+      <form [formGroup]="AddcompanyForm" id="AddcompanyForm">
+      <div class="card">
+        <div class="card-header" style="background-color: #9b833c;height: 36px;
+        color: #f0f3f5;
+        line-height: 0px;">
+          <h2 style="margin-top: -2px;">Company</h2> 
+        </div>
+        <div class="card-body">
+            <div class="row">
+
+
+              <mat-form-field class="example-full-width col-md-3">
+                <mat-label>Company Type</mat-label>
+                <mat-select formControlName="CompanyType"  (selectionChange)="GetModules($event.value)">
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let Company of CompanyType_List" [value]="Company"
+               >
+                    {{ Company }}
+                  </mat-option>
+                </mat-select>
+            
+              </mat-form-field>
+
+           
+              <!-- <img width="180px" height="140px" [src]="base64Image"  alt="" /> -->
+              <mat-form-field class="col-3 example-full-width" *ngIf="CompanyId!=0">
+                <input autocomplete="off" matInput placeholder="CorporateId" readonly=true formControlName="CorporateId" autocomplete="off" />
+
+              </mat-form-field>
+              
+                    <mat-form-field class="col-3 example-full-width">
+                      <input autocomplete="off" matInput placeholder="Company Name" formControlName="CompanyName" autocomplete="off" />
+                      <mat-error  *ngIf="formHasError('CompanyName', 'required')">
+                        Company Name is required
+                      </mat-error>
+                    </mat-form-field>
+
+                 
+                    <mat-form-field class=" col-3 example-full-width">
+                        <input matInput placeholder="Website" formControlName="Website" autocomplete="off"/>
+                        <mat-error  *ngIf="formHasError('Website', 'required')">
+                          website is required
+                        </mat-error>
+                      </mat-form-field>
+
+                      <mat-form-field class="col-3 example-full-width">
+                        <input autocomplete="off" matInput placeholder="Company Contact Person" formControlName="CompContactPerson" autocomplete="off" />
+                        <mat-error  *ngIf="formHasError('CompContactPerson', 'required')">
+                            Contact Person is required
+                        </mat-error>
+                      </mat-form-field>
+                 
+
+                  <mat-form-field class="example-full-width" class="col-3">
+                    <input autocomplete="off" matInput placeholder="Company EmailId" formControlName="CompEmail"  />
+                   <mat-error  *ngIf="formHasError('CompEmail', 'required')">
+                          Email Id is required
+                        </mat-error>
+                        <mat-error *ngIf="formHasError('CompEmail', 'pattern')">
+                          Please enter valid Email
+                        </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field class="example-full-width" class="col-3">
+                    <input autocomplete="off" matInput placeholder="Company MobileNo" formControlName="CompContactNo"   type="number" onKeyPress="if(this.value.length==10) return false;" />
+                    <mat-error  *ngIf="formHasError('CompContactNo', 'required')">
+                      Mobile No is required
+                    </mat-error>
+                    <mat-error *ngIf="formHasError('CompContactNo', 'pattern')">
+                      Should be 10 digit
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field class="col-3 example-full-width">
+                    <input autocomplete="off" matInput placeholder="Contact Employee Id" formControlName="ContEmpId" autocomplete="off" />                   
+                  </mat-form-field>
+
+                  <mat-form-field class="col-3 example-full-width">
+                    <input autocomplete="off" matInput placeholder="Max CapSize" 
+                    formControlName="MaxCapSize" autocomplete="off" type="number"  min="0" max="50" (blur)="checkcapsize($event.value);"/>
+                    <mat-error *ngIf="formHasError('MaxCapSize', 'required')">
+                     Enter CapSize
+                    </mat-error>
+                    <mat-error *ngIf="capsize==0">
+                      Number should be between 0 and 50
+                    </mat-error>
+                  </mat-form-field>
+
+                  <mat-form-field class="col-3 example-full-width">
+                    <input matInput [matDatepicker]="picker" autocomplete="off" 
+                    [min]="minDate" [max]="maxDate"  placeholder="Effective Date" formControlName="CompEffDate" readonly />
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+
+
+                  <mat-form-field class="col-3 example-full-width">
+                    <mat-label>Effective Status</mat-label>
+                    <mat-select formControlName="CompEffStat" [(value)]="selected1">
+                      <mat-option>None</mat-option>
+                      <mat-option *ngFor="let EffectiveStatus of EffectiveStatus_List" [value]="EffectiveStatus">
+                        {{ EffectiveStatus }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error>
+                        Effective Status is required
+                    </mat-error>
+                  </mat-form-field>
+                
+
+                  <button class="col-3 example-full-width" type="submit" class="btn btn-sm btn-info"  style="height: 29px;
+                  margin-top: 16px;
+                  margin-left: 10px;"
+                  (click)="showModules()"><i class="fa fa-eye"></i>
+                  Choose Modules for Company</button>
+                 
+            </div>
+
+            <!-- <div class="row">
+              <a (click)="showModules();" style="color: blue;cursor: pointer;"> &nbsp;&nbsp;Choose Modules for Company</a>
+            </div> <br> -->
+              <div class="row" *ngIf="showmodules_flag==1">
+                <div class="example-container" >
+                  <mat-table #table [dataSource]="dataSource" matSort class="table" >
+                            <br> 
+    
+                            <ng-container matColumnDef="select">
+                              <mat-header-cell *matHeaderCellDef class="mat-header"> select </mat-header-cell>
+                              <mat-cell *matCellDef="let row; let i = index;">
+                                  <ng-container>
+                                    <mat-checkbox 
+                                  
+                                    [checked]="row.select"
+                                    (change)="onChange($event,row.ModId,i); false"      
+                                   > 
+                                    </mat-checkbox>
+                                  </ng-container>
+                              </mat-cell>
+                          </ng-container>
+    
+    
+            
+                    <ng-container matColumnDef="ModName">
+                      <mat-header-cell *matHeaderCellDef class="mat-header" > Module Name </mat-header-cell>
+                      <mat-cell *matCellDef="let element" > {{element.ModName}} </mat-cell>
+                    </ng-container>
+                
+                 
+                
+                  
+            
+                    <mat-header-row *matHeaderRowDef="displayedColumns sticky: true" ></mat-header-row>
+                    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                  </mat-table>   
+                  <br>
+                  <div class="text-center  equlist" *ngIf="this.role_count===0" 
+                  style="background: white;height: 35px;color:red">
+                  <span>No Records Found...</span>
+                </div>
+                </div> 
+             
+
+            </div>
+        </div>
+        <div class="card-footer">
+            <table style="float: right;">
+                <tr>
+                    <td>  <button type="submit" class="btn btn-sm btn-success" (click)="Post_Company()"><i class="fa fa-dot-circle-o"></i>
+                        {{ this.CompanyId !== 0 ? 'Update' : 'Save' }}</button></td>
+                    <td>  <button type="button" [routerLink]="['/master/company']" 
+                        class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Cancel</button></td>
+                </tr>
+            </table>
+        
+        
+        </div>
+      </div>
+    </form>
+    </div>
+  
+  </div>
+  
+  
+  
+  

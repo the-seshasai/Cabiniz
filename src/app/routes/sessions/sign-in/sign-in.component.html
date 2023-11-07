@@ -1,0 +1,96 @@
+<div class="w-full h-full" fxLayout="row wrap" fxLayoutAlign="center center" >
+    <mat-card class="mat-elevation-z4 m-b-0"   style="max-width: 380px;">
+  
+      <form class="form-field-full" [formGroup]="SiginForm">
+        <img src="./assets/images/matero1(2).jpg" class="matero-branding-logo-expandeds" alt="logo" style="    display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 50%;" />
+        <br><br> 
+        
+        <mat-form-field appearance="outline">
+            <mat-label>Corporate ID</mat-label>
+            <input autocomplete="off" matInput placeholder="Corporate ID"  formControlName="CorporateId" required autocomplete="false">
+          
+            <mat-error *ngIf="formHasError('CorporateId', 'required')">
+              Corporate ID is required
+            </mat-error>
+          
+            <mat-hint>
+              If you don't have a Corporate ID, click on <a href="javascript:void(0);" (click)="setIndividualValue()">INDIVIDUAL</a> login.
+            </mat-hint>
+          </mat-form-field>
+          
+          
+
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input autocomplete="off" matInput placeholder="Name" formControlName="Name" required autocomplete="false"
+            >
+            <mat-error  *ngIf="formHasError('Name', 'required')">
+                Name is required
+              </mat-error>
+              <mat-error *ngIf="formHasError('Name', 'pattern')">
+                Alphabet only
+              </mat-error>
+            
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>MobileNo</mat-label>
+            <input autocomplete="off" matInput placeholder="MobileNo" formControlName="MobileNo" 
+            type="number" onKeyPress="if(this.value.length==10) return false;"
+            required autocomplete="false"
+            >
+            <mat-error  *ngIf="formHasError('MobileNo', 'required')">
+                Mobile Number is required
+              </mat-error>
+              <mat-error *ngIf="formHasError('MobileNo', 'pattern')">
+               Enter 10 Digit Number
+              </mat-error>
+        </mat-form-field>
+
+
+       
+    
+
+      
+
+
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input autocomplete="off" matInput placeholder="Email" formControlName="Email" required autocomplete="false"
+            >
+
+            <mat-error  *ngIf="formHasError('Email', 'required')">
+                Email is required
+              </mat-error>
+              <mat-error *ngIf="formHasError('Email', 'pattern')">
+                invalid Email
+              </mat-error>
+         
+          </mat-form-field>
+      
+      
+   
+          <button class="w-full" mat-raised-button color="primary"
+          (click)="SignIn()" >
+            Sign-In</button>
+
+                <br>
+
+               
+                <br>
+                <div class="center">
+                    <p><a href="javascript:void(0);" 
+                        
+                        routerLink="/auth/login" >Already have account?</a></p>
+                  </div>
+        
+      
+ 
+      </form>
+    </mat-card>
+    
+    
+  </div>

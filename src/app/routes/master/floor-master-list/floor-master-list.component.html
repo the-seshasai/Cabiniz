@@ -1,0 +1,158 @@
+
+
+<form class="form-horizontal form-material" id="AddFloorlistForm" 
+[formGroup]="AddFloorlistForm">
+    <table style="width: 100%;">
+      <tr>
+        <td style="width: 40%;">
+          <h2>Floor List</h2>
+        </td>
+        <td style="width: 30%;">
+          <mat-form-field class="search-box">
+            <mat-icon matSuffix >search</mat-icon>
+        <input matInput  type="text" placeholder="Search" [formControl]="searchText" autocomplete="off" matInput />
+        <button mat-button *ngIf="searchText.value" matSuffix mat-icon-button aria-label="Clear"
+          (click)="searchText.patchValue('')" title="Clear">
+          <mat-icon>close</mat-icon>
+        </button>
+        </mat-form-field>
+        </td>
+        <td style="width: 20%;">
+          <button type="button"  [routerLink]="['/master/addfloormaster/' + 0]" class="btn btn-block btn-success active" style="width: 60%;margin-left: 98px;">
+            <i class="fa fa-plus" title="Add"></i>&nbsp; Add Floor</button>
+        </td>
+      </tr>
+    </table>
+  
+  
+    <div class="row" style="background-color: white;
+    height: 65px;
+    border-top-style: solid;
+    border-left-style: solid;
+    border-right-style: solid;
+    border-width: thin;
+    border-color: #28a745;
+    border-radius: 17px;">
+      <div class="col-1">
+        <button mat-raised-button color="primary" (click)="ExportTOExcel()" style="margin-top: 20px;">
+          <mat-icon>file_download</mat-icon>
+          Export Excel
+        </button>
+      </div>
+
+      <div class="col-3">
+        <mat-form-field class="example-full-width" style="margin-left: 32%;
+        margin-top: 9px;">
+          <mat-label>Company</mat-label>
+          <mat-select formControlName="CompId" [(value)]="selected" (selectionChange)="Getlocation($event.value)">
+            <mat-option>Select one</mat-option>
+            <mat-option *ngFor="let Company of Company_List" [value]="Company.CompId">
+              {{ Company.CompanyName }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+              Company is required
+          </mat-error>
+        </mat-form-field>
+        </div>
+  
+        <div class="col-3">
+        <mat-form-field class="example-full-width" style="margin-left: 30%;
+        margin-top: 9px;">
+          <mat-label>Location</mat-label>
+          <mat-select formControlName="LocId" [(value)]="selected2" (selectionChange)="GetFloorlist($event.value)">
+            <mat-option>Select one</mat-option>
+            <mat-option *ngFor="let Location of Location_List" [value]="Location.LocId">
+              {{ Location.BuildingName }}
+            </mat-option>
+          </mat-select>
+          <mat-error>
+              Location is required
+          </mat-error>
+        </mat-form-field>
+        </div>
+  
+       
+    
+      <div class="col-5">
+        <mat-paginator #paginator style="width: 87%;
+        margin-left: 13%;
+        margin-top: 4px;"
+        [pageSize]="20"
+        [pageSizeOptions]="[20,40,60]">
+  </mat-paginator> 
+      </div>
+    </div>
+
+   
+    
+    
+  
+  
+  <br>
+  <div class="row" >
+  <div class="col-12">
+  <div class="example-container">
+  <mat-table #table [dataSource]="dataSource" matSort class="table" #TABLE>
+  
+  
+    <ng-container matColumnDef="FloorCode">
+      <mat-header-cell *matHeaderCellDef class="mat-header"> Floor Code </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.FloorCode}} </mat-cell>
+    </ng-container>
+  
+  
+    <!-- Weight Column -->
+    <ng-container matColumnDef="FloorName">
+      <mat-header-cell *matHeaderCellDef class="mat-header"> Floor Name  </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+      {{element.FloorName}}  </mat-cell>
+    </ng-container>
+
+  
+    <ng-container matColumnDef="FlrEffDate">
+      <mat-header-cell *matHeaderCellDef class="mat-header"> Effective Date </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.FlrEffDate | date :'dd-MM-yyyy'}} </mat-cell>
+    </ng-container>
+  
+
+  
+    <ng-container matColumnDef="Actions">
+      <mat-header-cell *matHeaderCellDef class="mat-header"> Action </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+           <button mat-icon-button class="button_Edit" [routerLink]="['/master/addfloormaster/' + element.FloorId]">
+          <i class="fa fa-edit color" title="Edit"></i>
+        </button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          
+      
+        <button  mat-icon-button class="button_delete" (click)="openDialog(element.FloorId)" >
+            <i class="fa fa-trash-o" title="Delete"></i>
+          </button> </mat-cell>
+    </ng-container>
+  
+  
+  
+  
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
+  
+  
+  <div class="text-center  equlist" *ngIf="this.Floorcount===0 && isLoading==false" 
+  style="background: white;height: 35px;color:red">
+  <span>No Records Found...</span>
+  </div>
+  <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center;width: 100%;">
+    <mat-progress-spinner 
+      color="#06798cf0" 
+      mode="indeterminate"
+      diameter="30"
+      strokeWidth="50">
+    </mat-progress-spinner>
+  </mat-card>
+  </div>
+  
+  </div>            
+  </div>
+  </form>
+  

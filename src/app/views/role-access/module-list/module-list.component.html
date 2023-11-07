@@ -1,0 +1,88 @@
+
+<br>
+<form class="form-horizontal form-material">
+
+<div class="parent">
+  <div class="div1"><h2>Module List</h2> </div>
+  <div class="div2">     <mat-form-field class="search-box">
+    <mat-icon matSuffix >search</mat-icon>
+<input matInput  type="text" placeholder="Search" [formControl]="searchText" autocomplete="off" matInput />
+<!-- <i id="filtersubmit" class="fa fa-search"></i> -->
+<button mat-button *ngIf="searchText.value" matSuffix mat-icon-button aria-label="Clear"
+  (click)="searchText.patchValue('')" title="Clear">
+  <mat-icon>close</mat-icon>
+</button>
+</mat-form-field> </div>
+  <div class="div3"> 
+    <!-- <button type="button" class="btn btn-success btncolor pull-right"  
+                    [routerLink]="['/company-master/add-company/' + 0]">
+                        <i class="fa fa-plus" title="Add"></i>
+                    <a style="color:inherit;">
+                      &nbsp;Company</a>
+                  </button> -->
+                  <div class="col-6 col-sm-2 col-md-2 col-xl mb-3 mb-xl-0">
+                    <!-- [routerLink]="['/role-access/add-role/' + 0]" -->
+                    <button type="button"  (click)="openDialog_Modules(0)"   class="btn btn-block btn-success active" aria-pressed="true">
+                        <i class="fa fa-plus" title="Add"></i>&nbsp; Add Module</button>
+                  </div>
+  </div>
+  <div class="div4">
+   </div>
+  </div>
+
+
+
+<br>
+<div class="row" style="margin-top: -69px;">
+<div class="col-12">
+<div class="example-container">
+<mat-table #table [dataSource]="dataSource" matSort class="table">
+
+<!-- 
+  <ng-container matColumnDef="CompanyName">
+    <mat-header-cell *matHeaderCellDef class="mat-header" fxFlex="40"> Company Name </mat-header-cell>
+    <mat-cell *matCellDef="let element" fxFlex="40"> {{element.CompanyName}} </mat-cell>
+  </ng-container> -->
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="ModName">
+    <mat-header-cell *matHeaderCellDef class="mat-header" > Module Name </mat-header-cell>
+    <mat-cell *matCellDef="let element" >
+    {{element.ModName}}  </mat-cell>
+  </ng-container>
+
+  
+
+  <ng-container matColumnDef="Actions">
+    <mat-header-cell *matHeaderCellDef class="mat-header"> Action </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+        <button mat-icon-button class="button_Edit" (click)="openDialog(element.ModId)">
+            <i class="fa fa-trash-o color" title="Edit"></i>
+             </button>&nbsp;&nbsp;  </mat-cell>
+  </ng-container>
+
+
+
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
+
+<div class="text-center  equlist" *ngIf="this.ModuleCount===0" 
+style="background: white;height: 35px;color:red">
+<span>No Records Found...</span>
+</div>
+<mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center;width: 100%;">
+  <mat-progress-spinner 
+    color="#06798cf0" 
+    mode="indeterminate"
+    diameter="30"
+    strokeWidth="50">
+  </mat-progress-spinner>
+</mat-card>
+</div>
+
+</div>            
+</div>
+</form>

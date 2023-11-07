@@ -1,0 +1,325 @@
+
+<breadcrumb></breadcrumb>
+<div class="row">    
+  <div class="col-sm-12">
+    <form [formGroup]="AddSeatmanagementForm" id="AddSeatmanagementForm">
+    <div class="card">
+      <div class="card-header" style="background-color: #9b833c;height: 36px;
+      color: #f0f3f5;
+      line-height: 0px;">
+        <h2 style="margin-top: -2px;">Seats Management</h2> 
+      </div>
+      <div class="card-body">
+         
+        <div class="row">
+          <mat-form-field class="example-full-width col-md-3">
+            <mat-label>Company<span style="color:#fc030b;"> *</span></mat-label>
+            <mat-select formControlName="CompId" [(value)]="selected1" (selectionChange)="Getlocation($event.value)">
+              <mat-option>Select one</mat-option>
+              <mat-option *ngFor="let Company of Company_List" [value]="Company.CompId">
+                {{ Company.CompanyName }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="formHasError('CompId', 'required')">
+              Company Name is required
+          </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width col-md-3">
+            <mat-label>Location<span style="color:#fc030b;"> *</span></mat-label>
+            <mat-select formControlName="LocId" [(value)]="selected2" (selectionChange)="GetFloor($event.value)">
+              <mat-option>Select one</mat-option>
+              <mat-option *ngFor="let Location of Location_List" [value]="Location.LocId">
+                {{ Location.BuildingName }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="formHasError('LocId', 'required')">
+             Location is required
+          </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width col-md-3">
+            <mat-label>Floor<span style="color:#fc030b;"> *</span></mat-label>
+            <mat-select formControlName="FloorId" [(value)]="selected3">
+              <mat-option>Select one</mat-option>
+              <mat-option *ngFor="let Floor of Floor_List" [value]="Floor.FloorId">
+                {{ Floor.FloorName }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="formHasError('FloorId', 'required')">
+              Floor Name is required
+           </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width col-md-3">
+            <mat-label>Category<span style="color:#fc030b;"> *</span></mat-label>
+            <mat-select formControlName="CategoryUId" [(value)]="selected4"  
+            (selectionChange)="ShowControl($event.value)">
+              <mat-option>Select one</mat-option>
+              <mat-option *ngFor="let catitem of Category_List" [value]="catitem.CategoryUId">
+                {{ catitem.CategoryName }}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="formHasError('CategoryUId', 'required')">
+              Category required
+           </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width col-md-3" *ngIf="roomflag==1">
+            <mat-label>No of {{caption}}</mat-label>
+            <input autocomplete="off" matInput formControlName="NoofRooms"
+            (change)="UpdateRoomCount($event.target.value)" 
+             autocomplete="off"/>
+          </mat-form-field>
+
+          
+
+          <mat-form-field class="example-full-width col-md-3" *ngIf="roomflag==0">
+            <input autocomplete="off" matInput placeholder="Caption of Seat" formControlName="TittleofSeat"
+            (change)="AssignSeatName($event.target.value)"
+             autocomplete="off"/>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width col-md-2" *ngIf="roomflag==0">
+            <input autocomplete="off" matInput placeholder="Number of Seats" formControlName="NoofSeats"
+             autocomplete="off" (change)="updateTextboxCount($event.target.value)" [(ngModel)]="NoofSeats"/>
+          </mat-form-field>
+
+          <!-- <mat-form-field class="example-full-width col-md-3">
+            <mat-label>Avilable slot</mat-label>
+            <mat-select formControlName="AvailableSlot" [(value)]="selected5">
+              <mat-option>Select one</mat-option>
+              <mat-option *ngFor="let Avilableslot of Avilableslot_List" [value]="Avilableslot">
+                {{ Avilableslot }}
+              </mat-option>
+            </mat-select>
+            <mat-error>
+              Available Slot is required
+            </mat-error>
+          </mat-form-field> -->
+
+
+        
+         
+         
+
+        </div>
+
+        <div class="row">
+            <div class="col-md-6" style="border-style: groove;border-width: 0.2px;padding: 10px;" *ngIf="RoomVisibleFlag>=1">
+                
+                <mat-label class="col-md-6">
+                  <h4>{{caption}} Details</h4> 
+                 </mat-label> <br>
+
+                <table  formArrayName="RoomMasterList" style="width: 90%;" >
+                  <thead>
+                    <tr>
+                      <td style="text-align:left;">Name</td>
+                      <td style="text-align: left;">Capacity</td>  
+                      <td style="text-align: left;">Available Slot</td>  
+                      <td style="text-align: left;">Action</td>  
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr [formGroupName]="i" *ngFor="let RoomItem of RooMasterControl.controls; let i = index" 
+                    style="height: 38px;">             
+                      
+                      <td>
+                          <mat-form-field  style="width: 90%;">
+                              <input matInput formControlName="RoomName" maxlength="20"
+                              (change)="AssignCabinSeatName(i)"  />
+                            </mat-form-field>
+                      
+                      </td>
+                      <td>
+                        <mat-form-field  style="width: 80%;" *ngIf="CategoryofMeetingRoomid==0">
+                            <input matInput formControlName="Capacity" maxlength="20" 
+                            (change)="UpdateSeatCount($event.target.value,i)" />
+                          </mat-form-field>
+                          <mat-form-field  style="width: 80%;" *ngIf="CategoryofMeetingRoomid==1">
+                            <input matInput formControlName="Capacity" maxlength="20" 
+                            />
+                          </mat-form-field>
+                        
+                    
+                    </td>
+                      <td >
+                          <mat-form-field style="width: 80%;">
+                              <mat-select formControlName="AvailableSlot">
+                                <mat-option>Select one</mat-option>
+                                <mat-option *ngFor="let Avilableslot of Avilableslot_List" [value]="Avilableslot">
+                                  {{ Avilableslot }}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                       
+                      </td>
+      
+                      <td>
+                                 
+      
+                          <button mat-icon-button class="action_btn_color deletebtn"  (click)="deleteRoomRow(i)">
+                            <i class="fa fa-trash-o" title="Delete" style="font-size: 22px;color: red;margin-top: 4px;
+                            margin-left: 21px;"></i>
+                          </button> 
+      
+                        </td>
+      
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+        
+                <div class="col-md-6" style="border-style: groove;border-width: 0.2px;padding: 10px;" *ngIf="SeatFlag>=1">
+                  <mat-label class="col-md-6">
+                    <h4>Seats Details</h4> 
+                   </mat-label> <br>
+          <table  formArrayName="SeatItemList" style="width: 100%;" >
+            <thead>
+              <tr>
+                <td style="text-align:left;">Name</td>
+                <td style="text-align: left;">Available Slot</td>  
+                <td style="text-align: left;">Action</td>  
+              </tr>
+            </thead>
+            <tbody>
+              <tr [formGroupName]="i" *ngFor="let seatItem of SeatNameControl.controls; let i = index" 
+              style="height: 38px;">             
+                
+                <td>
+                    <mat-form-field  style="width: 90%;">
+                        <input matInput formControlName="SeatItemName" maxlength="20"  />
+                      </mat-form-field>
+                
+                </td>
+                <td >
+                    <mat-form-field style="width: 80%;">
+                        <mat-select formControlName="AvailableSlot">
+                          <mat-option>Select one</mat-option>
+                          <mat-option *ngFor="let Avilableslot of Avilableslot_List" [value]="Avilableslot">
+                            {{ Avilableslot }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                 
+                </td>
+
+                <td>
+                           
+
+                    <button mat-icon-button class="action_btn_color deletebtn"  (click)="deleteRow(i)">
+                      <i class="fa fa-trash-o" title="Delete" style="font-size: 22px;color: red;margin-top: 4px;
+                      margin-left: 21px;"></i>
+                    </button> 
+
+                  </td>
+
+              </tr>
+            </tbody>
+          </table>
+
+            </div>
+
+            <div class="col-md-6" style="border-style: groove;border-width: 0.2px;padding: 10px;">
+               
+                <mat-label class="col-md-6">
+                  <h4>Parking Details</h4> 
+                 </mat-label> <br>
+                <section class="example-section" *ngFor="let item of Amenities_List"  class="col-md-3">
+                    <div class="checkbox-container">
+                      <mat-checkbox formCobtrolName="AmenityId"  class="example-margin" 
+                       [checked]="item.Select" (change)="onChange_GI($event,item)">
+                       {{item.AmenityDescription}}</mat-checkbox>
+                    </div>
+                    </section>
+               
+                    <mat-form-field class="example-full-width col-md-6" *ngIf="twowheelFlag==1">
+                      <input autocomplete="off" matInput placeholder="Noof Two Wheeler" 
+                      formControlName="NoOfParkingTwoWheeler" (change)="updateTextboxCounttw()"
+                       autocomplete="off"/>
+                      <mat-error  *ngIf="formHasError('NoOfParkingTwoWheeler', 'required')">
+                          NoOf Parking Two Wheeler is required
+                      </mat-error>
+                    </mat-form-field>
+        
+                  <mat-form-field class="example-full-width col-md-6" *ngIf="fourwheelFlag==1">
+                    <input autocomplete="off" matInput placeholder="Noof Four Wheeler" 
+                    formControlName="NoOfParkingFourWheeler" (change)="updateTextboxCounttw()"
+                     autocomplete="off"/>
+                    <mat-error  *ngIf="formHasError('NoOfParkingFourWheeler', 'required')">
+                        NoOf Parking Four Wheeler  is required
+                    </mat-error>
+                  </mat-form-field>
+        
+               
+
+                  <table  formArrayName="ParkingItemList" style="width: 90%;" *ngIf="WheelerFlag>=1">
+                    
+                    <thead>
+                      <tr>
+                        <td style="text-align:left;">Name</td>
+                        <td style="text-align: left;">Available Slot</td>  
+                        <td style="text-align: left;">Action</td>  
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr [formGroupName]="i" *ngFor="let seatItem of ParkingNameControl.controls; let i = index" style="height: 38px;">             
+                        
+                        <td>
+                            <mat-form-field  style="width: 90%;">
+                                <input matInput formControlName="ParkingName" maxlength="20"  />
+                              </mat-form-field>
+                        
+                        </td>
+                        <td >
+                            <mat-form-field style="width: 80%;">
+                                <!-- <mat-label>Avilable slot</mat-label> -->
+                                <mat-select formControlName="AvailableSlot">
+                                  <mat-option>Select one</mat-option>
+                                  <mat-option *ngFor="let Avilableslot of Avilableslot_List" [value]="Avilableslot">
+                                    {{ Avilableslot }}
+                                  </mat-option>
+                                </mat-select>
+                              </mat-form-field>
+                         
+                        </td>
+
+                        <td>
+                           
+
+                            <button mat-icon-button class="action_btn_color deletebtn"  (click)="deleteRowforwheeler(i)">
+                              <i class="fa fa-trash-o" title="Delete" style="font-size: 22px;color: red;margin-top: 4px;
+                              margin-left: 21px;"></i>
+                            </button> 
+        
+                          </td>
+        
+                      </tr>
+                    </tbody>
+                  </table>
+                
+            </div>
+        </div>
+           
+      </div>
+      <div class="card-footer">
+          <table style="float: right;">
+              <tr>
+                  <td>  <button  class="btn btn-sm btn-success" (click)="Post_seatmanagement();"><i class="fa fa-dot-circle-o"></i>
+                      {{ this.SeatUId !== '0' ? 'Update' : 'Save' }}</button></td>
+                  <td>  <button type="button" [routerLink]="['/master/seatmanagement']" 
+                      class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Cancel</button></td>
+              </tr>
+          </table>
+      
+      
+      </div>
+    </div>
+  </form>
+  </div>
+
+</div>
+
+
+

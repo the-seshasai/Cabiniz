@@ -1,0 +1,118 @@
+{
+  "menu": [
+    {
+      "route": "dashboard",
+      "name": "dashboard",
+      "type": "link",
+      "icon": "dashboard",
+      "badge": {
+        "color": "red-500",
+        "value": "5"
+      }
+    },
+    
+
+    {
+      "route": "master",
+      "name": "master",
+      "type": "sub",
+      "icon": "polymer",
+      "children": [
+        {
+          "route": "company",
+          "name": "company",
+          "type": "link",
+          "icon": "domain"
+        },
+        {
+          "route": "companylocationlist",
+          "name": "companylocationlist",
+          "type": "link",
+          "icon": "domain"
+        },
+
+       
+        
+        {
+          "route": "floormasterlist",
+          "name": "floormasterlist",
+          "type": "link",
+          "icon": "domain"
+        },
+        {
+          "route": "category-master",
+          "name": "category-master",
+          "type": "link",
+          "icon": "domain"
+        },
+        {
+          "route": "seatmanagement",
+          "name": "seatmanagement",
+          "type": "link",
+          "icon": "domain"
+        }
+        
+      
+      
+      ]
+    },
+    {
+      "route": "modules",
+      "name": "modules",
+      "type": "sub",
+      "icon": "museum",
+      "children": [
+        {
+          "route": "modulelist",
+          "name": "modulelist",
+          "type": "link",
+          "icon": "color_lens"
+        }
+        
+      ]
+    },
+    {
+      "route": "users",
+      "name": "users",
+      "type": "link",
+      "icon": "supervisor_account"
+      
+    },
+    {
+      "route": "role",
+      "name": "role",
+      "type": "link",
+      "icon": "library_add_check"
+    },
+    
+    {
+      "route": "booking",
+      "name": "booking",
+      "type": "link",
+      "icon": "place"
+      
+    },
+    {
+      "route": "attendance",
+      "name": "attendance",
+      "type": "link",
+      "icon": "assignment"
+      
+    },
+    {
+      "route": "approval",
+      "name": "approval",
+      "type": "link",
+      "icon": "how_to_reg"
+      
+    }
+   
+
+ 
+    
+
+
+   
+  ]
+}
+

@@ -1,0 +1,20 @@
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-branding',
+  template: `
+  <a class="matero-branding" href="#/">
+        <img src="./assets/images/matero.png" class="matero-branding-logo-expanded" alt="logo" />
+       
+      </a>
+  `,
+})
+export class BrandingComponent {}
+
+
+
+
+// <a class="matero-branding" href="#/">
+// <img src="./assets/images/matero.jpg" class="matero-branding-logo-expanded" alt="logo" />
+
+// </a>

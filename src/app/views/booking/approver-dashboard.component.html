@@ -1,0 +1,196 @@
+<div class="animated fadeIn">
+   
+    <div class="row">
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-header">
+              <strong>Approver Dashboard</strong> 
+            </div>
+            <div class="card-body">
+                <div class="row">
+                   <div class="col-sm-12">
+                    <div class="example-container" *ngIf="RoleId===3">
+                        <mat-table #table [dataSource]="dataSource">
+                      
+                    
+
+                          <ng-container matColumnDef="BuildingName">
+                            <mat-header-cell *matHeaderCellDef fxFlex="142px"> Building</mat-header-cell>
+                            <mat-cell *matCellDef="let element" fxFlex="142px"> {{element.BuildingName}} </mat-cell>
+                          </ng-container>
+
+                          <ng-container matColumnDef="Area">
+                            <mat-header-cell *matHeaderCellDef fxFlex="90px"> Area</mat-header-cell>
+                            <mat-cell *matCellDef="let element" fxFlex="90px"> {{element.Area}} </mat-cell>
+                          </ng-container>
+
+                          <ng-container matColumnDef="FullName">
+                            <mat-header-cell *matHeaderCellDef fxFlex="90px"> Employee</mat-header-cell>
+                            <mat-cell *matCellDef="let element" fxFlex="90px"> {{element.FullName}} </mat-cell>
+                          </ng-container>
+                      
+                          <!-- Name Column -->
+                          <ng-container matColumnDef="BookedOn">
+                            <mat-header-cell *matHeaderCellDef fxFlex="90px">BookedOn </mat-header-cell>
+                            <mat-cell *matCellDef="let element" fxFlex="90px"> {{element.BookedOn|date:'dd-MM-yyyy'}} </mat-cell>
+                          </ng-container>
+                      
+                          <ng-container matColumnDef="BookedFrom">
+                            <mat-header-cell *matHeaderCellDef fxFlex="90px">From </mat-header-cell>
+                            <mat-cell *matCellDef="let element" fxFlex="90px"> {{element.BookedFrom|date:'dd-MM-yyyy'}} </mat-cell>
+                          </ng-container>
+
+                          <ng-container matColumnDef="BookedTo">
+                            <mat-header-cell *matHeaderCellDef fxFlex="90px">To </mat-header-cell>
+                            <mat-cell *matCellDef="let element" fxFlex="90px"> {{element.BookedTo|date:'dd-MM-yyyy'}} </mat-cell>
+                          </ng-container>
+                      
+                          <!-- Symbol Column -->
+                          <ng-container matColumnDef="SeatName">
+                            <mat-header-cell *matHeaderCellDef fxFlex="90px"> Seat Name </mat-header-cell>
+                            <mat-cell *matCellDef="let element" fxFlex="90px"> {{element.SeatName}} </mat-cell>
+                          </ng-container>
+
+
+                          <ng-container matColumnDef="BookingType">
+                            <mat-header-cell *matHeaderCellDef fxFlex="90px"> Type </mat-header-cell>
+                            <mat-cell *matCellDef="let element" fxFlex="90px"> {{element.BookingType}} </mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="BookedNoDays">
+                            <mat-header-cell *matHeaderCellDef fxFlex="90px">  NoDays </mat-header-cell>
+                            <mat-cell *matCellDef="let element" fxFlex="90px"> {{element.BookedNoDays}} </mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="ApprovalStatus">
+                            <mat-header-cell *matHeaderCellDef fxFlex="90px">  Status </mat-header-cell>
+                            <mat-cell *matCellDef="let element" fxFlex="90px"> 
+                               
+                              <span *ngIf="element.ApprovalStatus === 'Pending'" style="color: orange;font-size: 14px;
+                              font-family: Roboto, 'Helvetica Neue', sans-serif;
+                              ">{{element.ApprovalStatus}}</span>
+
+                                <span *ngIf="element.ApprovalStatus === 'Rejected'" style="color: red;font-size: 14px;
+                              font-family: Roboto, 'Helvetica Neue', sans-serif;
+                              ">{{element.ApprovalStatus}}</span>
+
+                                <span *ngIf="element.ApprovalStatus === 'Approved'"style="color:green;font-size: 14px;
+                                font-family: Roboto, 'Helvetica Neue', sans-serif;
+                                ">{{element.ApprovalStatus}}</span>
+                             
+                        
+                        </mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="Action" stickyEnd>
+                            <mat-header-cell *matHeaderCellDef fxFlex="110px">&nbsp;&nbsp; Action </mat-header-cell>
+                            <mat-cell *matCellDef="let element" fxFlex="110px"> 
+                              &nbsp;&nbsp;    <button type="submit" class="btn btn-sm btn-success" (click)="OpenDialogue_status(element.BookingId);"><i class="fa fa-dot-circle-o"></i> Status</button>
+                            </mat-cell>
+                          </ng-container>
+                      
+                          <mat-header-row *matHeaderRowDef="displayedColumns sticky: true"></mat-header-row>
+                          <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+                        </mat-table>
+                      </div>
+
+
+                      <div class="example-container" *ngIf="RoleId===4">
+                        <mat-table #table [dataSource]="dataSource_Hr">
+                      
+                          <ng-container matColumnDef="BuildingName">
+                            <mat-header-cell *matHeaderCellDef fxFlex="142px"> Building</mat-header-cell>
+                            <mat-cell *matCellDef="let element" fxFlex="142px"> {{element.BuildingName}} </mat-cell>
+                          </ng-container>
+
+                          <ng-container matColumnDef="Area">
+                            <mat-header-cell *matHeaderCellDef fxFlex="90px"> Area</mat-header-cell>
+                            <mat-cell *matCellDef="let element" fxFlex="90px"> {{element.Area}} </mat-cell>
+                          </ng-container>
+
+                          <ng-container matColumnDef="FullName">
+                            <mat-header-cell *matHeaderCellDef fxFlex="90px"> Employee</mat-header-cell>
+                            <mat-cell *matCellDef="let element" fxFlex="90px"> {{element.FullName}} </mat-cell>
+                          </ng-container>
+                      
+                          <!-- Name Column -->
+                          <ng-container matColumnDef="BookedOn">
+                            <mat-header-cell *matHeaderCellDef fxFlex="90px">BookedOn </mat-header-cell>
+                            <mat-cell *matCellDef="let element" fxFlex="90px"> {{element.BookedOn|date:'dd-MM-yyyy'}} </mat-cell>
+                          </ng-container>
+                      
+                          <ng-container matColumnDef="BookedFrom">
+                            <mat-header-cell *matHeaderCellDef fxFlex="90px">From </mat-header-cell>
+                            <mat-cell *matCellDef="let element" fxFlex="90px"> {{element.BookedFrom|date:'dd-MM-yyyy'}} </mat-cell>
+                          </ng-container>
+
+                          <ng-container matColumnDef="BookedTo">
+                            <mat-header-cell *matHeaderCellDef fxFlex="90px">To </mat-header-cell>
+                            <mat-cell *matCellDef="let element" fxFlex="90px"> {{element.BookedTo|date:'dd-MM-yyyy'}} </mat-cell>
+                          </ng-container>
+                      
+                          <!-- Symbol Column -->
+                          <ng-container matColumnDef="SeatName">
+                            <mat-header-cell *matHeaderCellDef fxFlex="90px"> Seat Name </mat-header-cell>
+                            <mat-cell *matCellDef="let element" fxFlex="90px"> {{element.SeatName}} </mat-cell>
+                          </ng-container>
+
+
+                          <ng-container matColumnDef="BookingType">
+                            <mat-header-cell *matHeaderCellDef fxFlex="90px"> Type </mat-header-cell>
+                            <mat-cell *matCellDef="let element" fxFlex="90px"> {{element.BookingType}} </mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="BookedNoDays">
+                            <mat-header-cell *matHeaderCellDef fxFlex="90px">  NoDays </mat-header-cell>
+                            <mat-cell *matCellDef="let element" fxFlex="90px"> {{element.BookedNoDays}} </mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="ApprovalStatus">
+                            <mat-header-cell *matHeaderCellDef fxFlex="90px">  Status </mat-header-cell>
+                            <mat-cell *matCellDef="let element" fxFlex="90px"> 
+                               
+                              <span *ngIf="element.ApprovalStatus === 'Pending'" style="color: orange;font-size: 14px;
+                              font-family: Roboto, 'Helvetica Neue', sans-serif;
+                              ">{{element.ApprovalStatus}}</span>
+
+                                <span *ngIf="element.ApprovalStatus === 'Rejected'" style="color: red;font-size: 14px;
+                              font-family: Roboto, 'Helvetica Neue', sans-serif;
+                              ">{{element.ApprovalStatus}}</span>
+
+                                <span *ngIf="element.ApprovalStatus === 'Approved'"style="color:green;font-size: 14px;
+                                font-family: Roboto, 'Helvetica Neue', sans-serif;
+                                ">{{element.ApprovalStatus}}</span>
+                             
+                        
+                        </mat-cell>
+                          </ng-container>
+                          <ng-container matColumnDef="Action" stickyEnd>
+                            <mat-header-cell *matHeaderCellDef fxFlex="110px">&nbsp;&nbsp; Action </mat-header-cell>
+                            <mat-cell *matCellDef="let element" fxFlex="110px"> 
+                              &nbsp;&nbsp;    <button type="submit" class="btn btn-sm btn-success" (click)="OpenDialogue_status(element.BookingId);"><i class="fa fa-dot-circle-o"></i> Status</button>
+                            </mat-cell>
+                          </ng-container>
+                      
+                          <mat-header-row *matHeaderRowDef="displayedColumns_Hr sticky: true"></mat-header-row>
+                          <mat-row *matRowDef="let row; columns: displayedColumns_Hr;"></mat-row>
+                        </mat-table>
+                      </div>
+
+                      <div class="example-container" *ngIf="RoleId!=4 && RoleId!=3">
+                        <span style="color:red;text-align: center;">No Record Found...</span>
+                        </div>
+                      </div>
+                </div>
+            </div>
+            <!-- <div class="card-footer">
+                <table style="float: right;">
+                    <tr>
+                       
+                        <td>  <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Cancel</button></td>
+                    </tr>
+                </table>
+            
+            
+            </div> -->
+          </div>
+        </div>
+      
+      </div>
+  </div>
+  

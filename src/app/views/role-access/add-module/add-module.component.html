@@ -1,0 +1,47 @@
+
+
+  <div class="row">    
+    <div class="col-sm-12">
+      <form [formGroup]="AddModuleForm" id="AddModuleForm">
+      <div class="card">
+        <div class="card-header" style="background-color: #17a2b8;
+        color: #f0f3f5;
+        line-height: 0px;">
+          <strong>Module</strong> 
+        </div>
+        <div class="card-body">
+            <div class="row">
+           
+              
+                    <mat-form-field class="col-12 example-full-width">
+                      <input autocomplete="off" matInput placeholder="Module Name" formControlName="ModName" autocomplete="off" />
+                      <mat-error  *ngIf="formHasError('ModName', 'required')">
+                        Module Name is required
+                      </mat-error>
+                    </mat-form-field>
+
+                
+         
+            </div>
+        </div>
+        <div class="card-footer">
+            <table style="float: right;">
+                <tr>
+                    <td>  <button type="submit" class="btn btn-sm btn-success" (click)="Submit_Module();"><i class="fa fa-dot-circle-o"></i>
+                        {{ this.ModId !== 0 ? 'Update' : 'Save' }}</button></td>
+                    <td>  <button type="button"  mat-dialog-close
+                        class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Cancel</button></td>
+                </tr>
+            </table>
+        
+        
+        </div>
+      </div>
+    </form>
+    </div>
+  
+  </div>
+  
+  
+  
+  

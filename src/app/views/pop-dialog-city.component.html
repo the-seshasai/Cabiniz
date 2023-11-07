@@ -1,0 +1,58 @@
+
+
+    <div class="row">
+        <!-- <form class="form-horizontal form-material" [formGroup]="newTaskForm" id="newTaskForm"> -->
+        <div class="col-sm-12">
+          <div class="card">
+            <div class="card-header">
+              <strong>Select City</strong> 
+              <button type="reset" class="btn btn-sm btn-danger" style="float: right;color: white;" mat-dialog-close>
+              <i class="fa fa-close"></i>
+              </button>
+            </div>
+            <div class="card-body">
+            
+                <div class="row">
+                <!-- <div class="form-group col-sm-12">                -->
+                 
+                    <table style="width: 100%;">
+                      <tr>
+                        <td>
+                          <button type="submit" mat-dialog-close (click)="showPage('Chennai')"
+                          [routerLink]="['/booking/city']"  class="btn btn-block btn-primary active">
+                            <i class="fa fa-map-marker"></i>
+                            <span style="margin-left: 5px;">Chennai</span></button>
+                        </td>
+                        <td>
+                          <button type="submit" mat-dialog-close (click)="showPage('Bengaluru')"
+                           [routerLink]="['/booking/city']" class="btn btn-block btn-success">
+                            <i class="fa fa-map-marker"></i>
+                        <span style="margin-left: 5px;">Bengaluru</span></button>
+                        </td>
+                      </tr>
+                    </table>
+                   <!-- <button type="submit" mat-dialog-close [routerLink]="['/booking/seatselection/' + 'Chennai']" 
+                   class="btn btn-pill btn-light btn-lg" style="margin-bottom: 4px">
+                        
+                      </button>
+                    
+                      <button type="submit" mat-dialog-close  [routerLink]="['/booking/seatselection/' + 'Bengaluru']"
+                      class="btn btn-pill btn-light btn-lg" style="margin-bottom: 4px">
+                        <i class="fa fa-reddit"></i>
+                        <span>Bengaluru</span>
+                      </button> -->
+
+                      
+                  <!-- </div> -->
+                 
+                </div>
+
+               
+            </div>
+           
+          </div>
+        </div>
+      <!-- </form> -->
+      </div>
+  
+

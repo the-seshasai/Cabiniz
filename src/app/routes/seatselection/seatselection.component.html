@@ -1,0 +1,98 @@
+<breadcrumb></breadcrumb>
+    <div class="row">
+        <div class="col-sm-12">
+          <div class="card" *ngFor="let item of LoadWorkSpaceByCity let i1 = index">
+            <div class="card-header" style="background-color: #8BC34A;">
+              <h2>View Seats</h2> 
+            </div>
+            <div class="card-body">
+              <table style="width: 100%;line-height: 3;">
+                <tr>
+                    <td><i class="fa fa-map-marker"></i> City :<span style="color:#3f51b5"> {{item.City}}</span> </td>
+                    <td> <i class="fa fa-map-marker"></i> Location :<span style="color:#ff4081"> {{item.Area}}</span> </td>
+                    <!-- <td> <i class="fa fa-building-o"></i> Building :<span style="color:#3f51b5"> {{item.BuildingName}}</span> </td> -->
+
+                     <td>
+                      <button type="button" (click)="Show(item.CompId,item.LocId,i1);" class="btn btn-sm btn-info btn-pill" 
+                     ><i class="fa fa-eye"></i> View Seats</button>
+                     <!-- <table>
+                       <tr>
+                         <td><i class="fa fa-map-marker"></i> Available Cubicle :</td>
+                         <td><span style="color:#3f51b5"> {{item.AvailableSeat}}</span></td>  
+                       </tr>
+                       <tr>
+                        <td><i class="fa fa-map-marker"></i> Available Conference :</td>
+                         <td><span style="color:#3f51b5">{{item.AvailableConference}} </span></td>         
+                      </tr> 
+                    
+                      
+                     </table>-->
+                    
+                    </td>
+                </tr>
+                <tr>
+                     <td>Booked Seats :   
+                        <img src="assets/images/Bookedcabin.png"  alt="logo" width="30" height="20" /></td>
+                      <td>| Available Seats: 
+                        <img src="assets/images/aa.png"  alt="logo" width="30" height="20" /></td>
+                        <td>
+                          <i class="fa fa-calendar-plus-o"></i> From-To Date : 
+                           <span style="color:#3f51b5"> {{fromDate|date:'dd/MM/yyyy'}} {{BookFromTime}}-{{toDate|date:'dd/MM/yyyy'}} {{BookToTime}}</span>
+
+                          <input class="form-check-input" type="checkbox" value="option1" id="checkbox1" style="margin-top: 19px;margin-left: 50px;">
+                          <span style="margin-top: 6px;margin-left: 72px;color:#3f51b5">Car Parking  </span> 
+                        </td>
+                         
+                </tr>
+            </table>
+
+           
+            
+               <br>
+               <div class="row" *ngIf="flag==i1"  style="margin-left: 8px;width: 100%;
+               overflow-x: auto;
+               overflow-y: auto;">
+                <div class="col-sm-12">
+                  <table style="width: 100%;" class="table table-sm" >
+                    <tr>
+                        <td *ngFor="let name of ImageList let i = index"> 
+                            <!-- <input class="form-check-input" type="radio" value="option1" id="i"
+                             (change)="eventCheck(items.CubicleName,items.CubicleNo,i1)" style="margin-top: 12px;"> -->
+
+                             <input type="checkbox" [name]="name.CubicleName" (change)="onChange($event,i,name.CubicleNo)" 
+                             [disabled]="isChecked && (isCheckedName!=name.CubicleName)" *ngIf="BookingTypeS=='Cubicle' && name.AvailableStatus=='Available'">
+                           
+
+                             <input type="checkbox"  [disabled]="true" [name]="name.CubicleName"  *ngIf="BookingTypeS=='Cubicle' && name.AvailableStatus=='Booked'">
+                             {{name.CubicleName}}
+
+                           <img src="assets/images/aa.png" *ngIf="BookingTypeS=='Cubicle' && name.AvailableStatus=='Available'"  alt="logo" width="75" height="60" /><br>
+                           <img src="assets/images/Bookedcabin.png" *ngIf="BookingTypeS=='Cubicle' && name.AvailableStatus=='Booked'"  alt="logo" width="75" height="60" /><br>
+
+                           <img src="assets/images/Conference.jpg" *ngIf="BookingTypeS=='Conference'"  alt="logo" width="75" height="60" /><br>
+                                <!--  <h5 style="margin-left: 17px;color: gray;margin-top: 4px;">{{items.CubicleName}}</h5> -->
+                            </td>
+                            </tr>
+                            </table>
+
+                </div>
+               </div>
+            </div>
+          </div>
+
+                 <div>
+                <table style="float: right;">
+                    <tr>
+                        <td>  <button type="submit" class="btn btn-sm btn-success" (click)="Post_Booking();"><i class="fa fa-dot-circle-o"></i> Submit</button></td>
+                        <td>  <button type="submit" class="btn btn-sm btn-danger" (click)="PageRedirect();"><i class="fa fa-ban"></i> Cancel</button></td>
+                    </tr>
+                </table>
+            
+            
+            </div>
+        </div>
+      </div>
+      
+
+  
+

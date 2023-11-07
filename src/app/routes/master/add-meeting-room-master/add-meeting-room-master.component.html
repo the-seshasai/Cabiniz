@@ -1,0 +1,141 @@
+
+<breadcrumb></breadcrumb>
+<div class="row">    
+  <div class="col-sm-12">
+    <form [formGroup]="AddMeetingRoomForm" id="AddMeetingRoomForm">
+    <div class="card">
+      <div class="card-header" style="background-color: #9b833c;height: 36px;
+      color: #f0f3f5;
+      line-height: 0px;">
+        <h2 style="margin-top: -2px;">Meeting Room</h2> 
+      </div>
+      <div class="card-body">
+         
+        <div class="row">
+          <mat-form-field class="example-full-width col-md-3">
+            <mat-label>Company</mat-label>
+            <mat-select formControlName="CompId" [(value)]="selected" (selectionChange)="Getlocation($event.value)">
+              <mat-option>Select one</mat-option>
+              <mat-option *ngFor="let Company of Company_List" [value]="Company.CompId">
+                {{ Company.CompanyName }}
+              </mat-option>
+            </mat-select>
+            <mat-error>
+                Company is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width col-md-3">
+            <mat-label>Location</mat-label>
+            <mat-select formControlName="LocId" [(value)]="selected2" (selectionChange)="GetFloor($event.value)">
+              <mat-option>Select one</mat-option>
+              <mat-option *ngFor="let Location of Location_List" [value]="Location.LocId">
+                {{ Location.BuildingName }}
+              </mat-option>
+            </mat-select>
+            <mat-error>
+                Location is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width col-md-3">
+            <mat-label>Floor</mat-label>
+            <mat-select formControlName="FloorId" [(value)]="selected3">
+              <mat-option>Select one</mat-option>
+              <mat-option *ngFor="let Floor of Floor_List" [value]="Floor.FloorId">
+                {{ Floor.FloorName }}
+              </mat-option>
+            </mat-select>
+            <mat-error>
+              Floor Name is required
+            </mat-error>
+          </mat-form-field>
+
+
+          <mat-form-field class="example-full-width col-md-3">
+            <input autocomplete="off" matInput placeholder="MeetingRoom Code" formControlName="MRMCode"
+             autocomplete="off"/>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width col-md-3">
+            <input autocomplete="off" matInput placeholder="Meeting No" formControlName="MRMNo"
+             autocomplete="off"/>
+          </mat-form-field>
+
+
+          <mat-form-field class="example-full-width col-md-3">
+            <input autocomplete="off" matInput placeholder="MeetingRoom Name" formControlName="MRMName"
+             autocomplete="off"/>
+            <mat-error  *ngIf="formHasError('MRMName', 'required')">
+              MeetingRoom Name is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width col-md-3">
+            <input autocomplete="off" matInput placeholder="Tariff PerDay" formControlName="TariffPerDay"
+             autocomplete="off"/>
+          </mat-form-field>
+
+
+          <mat-form-field class="example-full-width col-md-3">
+            <mat-label>Avilable slot</mat-label>
+            <mat-select formControlName="AvailableSlot" [(value)]="selected4">
+              <mat-option>Select one</mat-option>
+              <mat-option *ngFor="let Avilableslot of Avilableslot_List" [value]="Avilableslot">
+                {{ Avilableslot }}
+              </mat-option>
+            </mat-select>
+            <mat-error>
+              Available Slot is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width col-md-3">
+            <mat-label>Effective Status</mat-label>
+            <mat-select formControlName="MRMEffStat" [(value)]="selected5" >
+              <mat-option>Select One</mat-option>
+              <mat-option *ngFor="let EffectiveStatus of EffectiveStatus_List" [value]="EffectiveStatus">
+                {{ EffectiveStatus }}
+              </mat-option>
+            </mat-select>
+            <mat-error  *ngIf="formHasError('MRMEffStat', 'required')">
+              Effective Status is required
+          </mat-error>
+          </mat-form-field>
+
+
+          <mat-form-field class="example-full-width col-md-3">
+            <input  matInput [matDatepicker]="picker"  [min]="minDate" [max]="maxDate" placeholder="Effective Date"
+             formControlName="MRMEffDate" readonly />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker ></mat-datepicker>
+            <mat-error  *ngIf="formHasError('MRMEffDate', 'required')">
+              Effective Date is required
+            </mat-error>
+          </mat-form-field> 
+
+        </div>
+
+          
+           
+      </div>
+      <div class="card-footer">
+          <table style="float: right;">
+              <tr>
+                  <td>  <button type="submit" class="btn btn-sm btn-success" (click)="Post_meetintroom();"><i class="fa fa-dot-circle-o"></i>
+                      {{ this.MRMId !== 0 ? 'Update' : 'Save' }}</button></td>
+                  <td>  <button type="button" [routerLink]="['/master/meetingroommasterlist']" 
+                      class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Cancel</button></td>
+              </tr>
+          </table>
+      
+      
+      </div>
+    </div>
+  </form>
+  </div>
+
+</div>
+
+
+

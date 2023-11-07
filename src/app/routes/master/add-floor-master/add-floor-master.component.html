@@ -1,0 +1,103 @@
+
+<breadcrumb></breadcrumb>
+<div class="row">    
+  <div class="col-sm-12">
+    <form [formGroup]="AddFloorForm" id="AddFloorForm">
+    <div class="card">
+      <div class="card-header" style="background-color: #9b833c;height: 36px;
+      color: #f0f3f5;
+      line-height: 0px;">
+        <h2 style="margin-top: -2px;">Floor</h2> 
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <mat-form-field class="example-full-width col-md-3">
+            <mat-label>Company</mat-label>
+            <mat-select formControlName="CompId" [(value)]="selected" (selectionChange)="Getlocation($event.value)">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let Company of Company_List" [value]="Company.CompId">
+                {{ Company.CompanyName }}
+              </mat-option>
+            </mat-select>
+            <mat-error>
+                Company is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width col-md-3">
+            <mat-label>Location</mat-label>
+            <mat-select formControlName="LocId" [(value)]="selected1">
+              <mat-option>None</mat-option>
+              <mat-option *ngFor="let Location of Location_List" [value]="Location.LocId">
+                {{ Location.BuildingName }}
+              </mat-option>
+            </mat-select>
+            <mat-error>
+                Location is required
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field class="example-full-width col-md-3">
+            <input autocomplete="off" matInput placeholder="Floor Code" formControlName="FloorCode"
+             autocomplete="off"/>
+          </mat-form-field>
+
+
+          <mat-form-field class="example-full-width col-md-3">
+            <input autocomplete="off" matInput placeholder="Floor Name" formControlName="FloorName"
+             autocomplete="off"/>
+            <mat-error  *ngIf="formHasError('FloorName', 'required')">
+              Floor Name is required
+            </mat-error>
+          </mat-form-field>
+
+
+          <mat-form-field class="example-full-width col-md-3">
+            <mat-label>Effective Status</mat-label>
+            <mat-select formControlName="FlrEffStat" [(value)]="selected3" >
+              <mat-option>Select One</mat-option>
+              <mat-option *ngFor="let EffectiveStatus of EffectiveStatus_List" [value]="EffectiveStatus">
+                {{ EffectiveStatus }}
+              </mat-option>
+            </mat-select>
+            <mat-error  *ngIf="formHasError('FlrEffStat', 'required')">
+              Effective Status is required
+          </mat-error>
+          </mat-form-field>
+
+
+          <mat-form-field class="example-full-width col-md-3">
+            <input  matInput [matDatepicker]="picker"  [min]="minDate" [max]="maxDate" placeholder="Effective Date"
+             formControlName="FlrEffDate" readonly />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker ></mat-datepicker>
+            <mat-error  *ngIf="formHasError('FlrEffDate', 'required')">
+              Effective Date is required
+            </mat-error>
+          </mat-form-field> 
+
+        </div>
+
+          
+           
+      </div>
+      <div class="card-footer">
+          <table style="float: right;">
+              <tr>
+                  <td>  <button type="submit" class="btn btn-sm btn-success" (click)="Post_Floor();"><i class="fa fa-dot-circle-o"></i>
+                      {{ this.Floorid !== 0 ? 'Update' : 'Save' }}</button></td>
+                  <td>  <button type="button" [routerLink]="['/master/floormasterlist']" 
+                      class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Cancel</button></td>
+              </tr>
+          </table>
+      
+      
+      </div>
+    </div>
+  </form>
+  </div>
+
+</div>
+
+
+

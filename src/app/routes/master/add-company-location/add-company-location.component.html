@@ -1,0 +1,298 @@
+
+<breadcrumb></breadcrumb>
+  <div class="row">    
+    <div class="col-sm-12">
+      <form [formGroup]="AddlocationForm" id="AddlocationForm">
+      <div class="card">
+        <div class="card-header" style="background-color: #9b833c;height: 36px;
+        color: #f0f3f5;
+        line-height: 0px;">
+          <h2 style="margin-top: -2px;">Location</h2> 
+        </div>
+        <div class="card-body">
+           <div class="row">
+            <mat-form-field class="example-full-width col-md-3">
+              <mat-label>Company</mat-label>
+              <mat-select formControlName="CompId" [(value)]="selected"     (selectionChange)="GetCompany($event.value)">
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let Company of Company_List" [value]="Company.CompId"
+             >
+                  {{ Company.CompanyName }}
+                </mat-option>
+              </mat-select>
+              <mat-error  *ngIf="formHasError('CompId', 'required')">
+                Company is required
+              </mat-error>
+            </mat-form-field>
+
+
+
+            <mat-form-field class="example-full-width col-md-3">
+              <input autocomplete="off" matInput placeholder="Building Name" formControlName="BuildingName"
+               autocomplete="off"/>
+              <mat-error  *ngIf="formHasError('BuildingName', 'required')">
+                Location Name is required
+              </mat-error>
+            </mat-form-field>
+
+
+            <mat-form-field class="example-full-width col-md-3">
+              <input autocomplete="off" matInput placeholder="Contact Person" formControlName="LocContactPerson"  maxlength="16" 
+              />
+              <mat-error  *ngIf="formHasError('LocContactPerson', 'required')">
+                Contact Person is required
+              </mat-error>
+              <mat-error *ngIf="formHasError('LocContactPerson', 'pattern')">
+               Alpha Only
+              </mat-error>
+            </mat-form-field>
+            
+            <mat-form-field class="example-full-width col-md-3">
+              <input autocomplete="off" matInput placeholder="Contact No" formControlName="LocContactNumber"  
+              type="number" onKeyPress="if(this.value.length==10) return false;" />
+              <mat-error  *ngIf="formHasError('LocContactNumber', 'required')">
+                Contact No is required
+              </mat-error>
+              <mat-error *ngIf="formHasError('LocContactNumber', 'pattern')">
+                Should be 10 digit
+              </mat-error>
+            </mat-form-field>
+
+
+            <mat-form-field class="example-full-width col-md-3">
+              <input autocomplete="off" matInput placeholder="Contact Email" formControlName="LocEmail" />
+              <mat-error  *ngIf="formHasError('LocEmail', 'required')">
+                Email is required
+              </mat-error>
+              <mat-error *ngIf="formHasError('LocEmail', 'pattern')">
+                Please enter valid Email
+              </mat-error>
+            </mat-form-field>
+
+           
+              <mat-form-field class="example-full-width col-md-3">
+                <input autocomplete="off" matInput placeholder="Door No" formControlName="DoorNum"  maxlength="10" 
+               />
+                <mat-error  *ngIf="formHasError('DoorNum', 'required')">
+                  DoorNum is required
+                </mat-error>
+                <mat-error *ngIf="formHasError('DoorNum', 'pattern')">
+                  Allow Numbers, Comma, Front Slash,Charater only
+                </mat-error>
+              </mat-form-field>
+           
+
+          
+              <mat-form-field class="example-full-width col-md-3">
+                <input autocomplete="off" matInput placeholder="FloorName" formControlName="FloorName" maxlength="50" 
+                />
+                <mat-error  *ngIf="formHasError('FloorName', 'required')">
+                  Street is required
+                </mat-error>
+              </mat-form-field>
+           
+
+           
+              <mat-form-field class="example-full-width col-md-3">
+                <input autocomplete="off" matInput placeholder="Area" formControlName="Area" autocomplete="off" (blur)="Setval($event.target.value)"
+                 pattern="^[A-Za-z ]+$" />
+                <mat-error  *ngIf="formHasError('Area', 'required')">
+                  Area is required
+                </mat-error>
+              </mat-form-field>
+          
+            
+          
+              <mat-form-field class="example-full-width col-md-3">
+                <input autocomplete="off" matInput placeholder="City" formControlName="City" autocomplete="off" 
+                pattern="^[A-Za-z ]+$" />
+                <mat-error  *ngIf="formHasError('City', 'required')">
+                  City is required
+                </mat-error>
+              </mat-form-field>
+           
+
+
+            
+              <mat-form-field class="example-full-width col-md-3">
+                <input autocomplete="off" matInput placeholder="District" formControlName="District" autocomplete="off" 
+                pattern="^[A-Za-z ]+$" />
+                <mat-error  *ngIf="formHasError('District', 'required')">
+                  District is required
+                </mat-error>
+              </mat-form-field>
+           
+          
+              <mat-form-field class="example-full-width col-md-3">
+                <input autocomplete="off" matInput placeholder="State" formControlName="StreetName" 
+                autocomplete="off" pattern="^[A-Za-z ]+$" />
+                <mat-error  *ngIf="formHasError('StreetName', 'required')">
+                  State is required
+                </mat-error>
+              </mat-form-field>
+            
+
+            
+              <mat-form-field class="example-full-width col-md-3">
+                <input autocomplete="off" matInput placeholder="Pin Code" formControlName="PinCode" 
+                type="number" onKeyPress="if(this.value.length==6) return false;" />
+                <mat-error  *ngIf="formHasError('PinCode', 'required')">
+                  Pin Code is required
+                </mat-error>
+                <mat-error *ngIf="formHasError('PinCode', 'pattern')">
+                  Please enter valid PinCode
+                </mat-error>
+              </mat-form-field>
+            
+
+              <mat-form-field class="example-full-width col-md-3">
+                <mat-label>Amenities</mat-label>
+                <mat-select formControlName="Temp_AmenityList" [(value)]="selected2" multiple>
+                  <mat-option *ngFor="let Amenities_Item of GetAmenities_list" [value]="Amenities_Item.AmenityId">
+                    {{ Amenities_Item.AmenityDescription }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width col-md-3">
+                <mat-label>Effective Status</mat-label>
+                <mat-select formControlName="LocEffStat" [(value)]="selected3" >
+                  <mat-option>Select One</mat-option>
+                  <mat-option *ngFor="let EffectiveStatus of EffectiveStatus_List" [value]="EffectiveStatus">
+                    {{ EffectiveStatus }}
+                  </mat-option>
+                </mat-select>
+                <mat-error  *ngIf="formHasError('LocEffStat', 'required')">
+                  Effective Status is required
+              </mat-error>
+              </mat-form-field>
+
+
+              <mat-form-field class="example-full-width col-md-3">
+                <input  matInput [matDatepicker]="picker"  [min]="minDate" [max]="maxDate" placeholder="Effective Date"
+                 formControlName="LocEffDate" readonly />
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker ></mat-datepicker>
+                <mat-error  *ngIf="formHasError('LocEffDate', 'required')">
+                  Effective Date is required
+                </mat-error>
+              </mat-form-field>
+              
+
+
+              <mat-form-field class="example-full-width col-3" >
+                <mat-label>Working Days </mat-label>
+                <mat-select formControlName="AvailableDays">
+                  <mat-option>Select One</mat-option>
+                  <mat-option *ngFor="let AvailableDays of AvailableDays_List" [value]="AvailableDays">
+                    {{ AvailableDays }}
+                  </mat-option>
+                </mat-select> 
+                <mat-error>
+                  Avail Days is required
+              </mat-error>                       
+              </mat-form-field>
+
+              <mat-form-field class="example-full-width col-3" >                             
+                <mat-label>Working Slot </mat-label>
+                <mat-select formControlName="AvailableTime" >
+                  <mat-option>Select One</mat-option>
+                  <mat-option *ngFor="let WorkingSlot of WorkingSlot_List" [value]="WorkingSlot">
+                    {{ WorkingSlot }}
+                  </mat-option>
+                </mat-select>   
+                <mat-error>
+                  Working Slot is required
+              </mat-error>                    
+              </mat-form-field>
+
+           </div>
+
+            
+          <table  formArrayName="LocationImageList" >
+
+            <tr>
+              <th>Image Upload</th>
+            </tr>
+
+            <br>
+            <tr [formGroupName]="i" *ngFor="let Item of LocationImageListControl.controls; let i = index" style="width: 100%;">
+
+            <td class="dbfr-upload-btn-wrapper">
+
+
+              <!-- <img width="80px" height="80px" [src]="base64Image"  (error)="setDefaultPic('user')" alt="" loading=""/> -->
+       
+                <img width="80px" height="80px" [src]="base64Image" (error)="setDefaultPic('user')"  alt="" loading=""/> &nbsp;
+                <input formControlName="ImageURL" type="file" name="myfile" accept="image/*"
+               (change)="OnchangeImage($event,i)">
+         
+       
+
+              
+
+
+<!-- 
+                            <input  id="ImageUrl"   type="file" name="myfile" accept="image/*" 
+              formControlName="Imagefile" (change)="OnchangeImage($event,i)"
+              > -->
+
+           
+              <button mat-icon-button class="button_Edit"  type="button">
+                <i class="fa fa-edit color" title="Edit"></i>
+                 </button>&nbsp;
+      
+                 <button mat-icon-button type="button" class="button_delete"
+                 (click)="DeleteRow(i)"   [disabled]="LocationImageListControl.length === 1" >
+                  <i class="fa fa-trash-o" title="Delete"></i>
+                </button>
+
+            </td>
+            </tr>
+            <br>
+            <tr>
+              <td>
+                <button class="AddImage" type="button">
+                  <span>Add New</span>
+                  <i class="material-icons" title="Add Row" (click)="addRow()" style="cursor: pointer;">
+                    control_point
+                  </i>               
+                </button>
+                
+              
+              </td>
+             
+            </tr>
+          
+           
+        
+
+            </table>
+           
+   
+     
+
+
+             
+        </div>
+        <div class="card-footer">
+            <table style="float: right;">
+                <tr>
+                    <td>  <button type="submit" class="btn btn-sm btn-success" (click)="Post_location()"><i class="fa fa-dot-circle-o"></i>
+                        {{ this.Locid !== 0 ? 'Update' : 'Save' }}</button></td>
+                    <td>  <button type="button" [routerLink]="['/master/companylocationlist']" 
+                        class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Cancel</button></td>
+                </tr>
+            </table>
+        
+        
+        </div>
+      </div>
+    </form>
+    </div>
+  
+  </div>
+  
+  
+  
+  

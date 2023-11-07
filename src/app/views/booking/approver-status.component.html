@@ -1,0 +1,37 @@
+<div>
+    <div class="row">
+      <div class="col-md-12">
+        <table style="width: 100%;">
+          <tr>
+            <td>  <h2>Are you sure want to Approve or Reject</h2></td>
+            <td> <button type="button" mat-dialog-close class="card-header-action btn btn-link btn-close"><i class="icon-close"></i></button></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <mat-dialog-actions>
+      <form class="form-horizontal form-material" id="ApproverStatusForm"  
+      [formGroup]="ApproverStatusForm">
+      <div class="row">
+        <table style="width: 100%;margin-left: 126px;" class="pull-right"    >
+          <tr>
+            <td>
+              <button type="submit" class="btn btn-success btncolor pull-right" (click)='Post_ApproverStatus()'>                                  
+                <a style="color:inherit;">
+                  &nbsp;Approve</a>
+              </button> 
+            </td>
+            <td >
+             
+
+              <button type="submit" style="margin-right: 10px;" class="btn btn-danger btncolor pull-right"  (click)='Post_RejectStatus()' 
+              mat-dialog-close>Reject                                     
+              </button>
+            </td>
+          </tr>
+        </table>
+      </div>
+      </form>
+    </mat-dialog-actions>
+  </div>
+  

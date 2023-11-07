@@ -1,0 +1,142 @@
+
+
+<form class="form-horizontal form-material" style="background-color: white;">
+    <table style="width: 100%;">
+      <tr>
+        <td style="width: 40%;">
+          <h2>Seat Management</h2>
+        </td>
+        <td style="width: 30%;">
+          <mat-form-field class="search-box">
+            <mat-icon matSuffix >search</mat-icon>
+        <input matInput  type="text" placeholder="Search" [formControl]="searchText" autocomplete="off" matInput />
+        <button mat-button *ngIf="searchText.value" matSuffix mat-icon-button aria-label="Clear"
+          (click)="searchText.patchValue('')" title="Clear">
+          <mat-icon>close</mat-icon>
+        </button>
+        </mat-form-field>
+        </td>
+        <td style="width: 20%;">
+          <button type="button"  [routerLink]="['/master/addseats/' + '0']" class="btn btn-block btn-success active" style="width: 60%;margin-left: 98px;">
+            <i class="fa fa-plus" title="Add"></i>&nbsp; Add Seats</button>
+        </td>
+      </tr>
+    </table>
+  
+  
+    <div class="row">
+      <div class="col-6">
+        <!-- <button mat-raised-button color="primary" (click)="ExportTOExcel()">
+          <mat-icon>file_download</mat-icon>
+          Export Excel
+        </button> -->
+      </div>
+      <div class="col-6">
+        <mat-paginator #paginator
+        [pageSize]="20"
+        [pageSizeOptions]="[20,40,60]">
+  </mat-paginator> 
+      </div>
+    </div>
+    
+  
+  
+  <br>
+  <div class="row" >
+  <div class="col-12">
+  <div class="example-container">
+    <table mat-table [dataSource]="dataSource">
+
+        <ng-container matColumnDef="CompanyName">
+          <th mat-header-cell *matHeaderCellDef> Company Name </th>
+          <td mat-cell *matCellDef="let data; let i = index" 
+              [attr.rowspan]="getRowSpan('CompanyName', i)"
+              [style.display]="getRowSpan('CompanyName', i) ? '' : 'none'"> {{data.CompanyName}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="BuildingName">
+          <th mat-header-cell *matHeaderCellDef> Building Name </th>
+          <td mat-cell *matCellDef="let data; let i = index" 
+              [attr.rowspan]="getRowSpan('BuildingName', i)"
+              [style.display]="getRowSpan('BuildingName', i) ? '' : 'none'"> {{data.BuildingName}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="FloorName">
+            <th mat-header-cell *matHeaderCellDef> Floor Name </th>
+            <td mat-cell *matCellDef="let data; let i = index" 
+                [attr.rowspan]="getRowSpan('FloorName', i)"
+                [style.display]="getRowSpan('FloorName', i) ? '' : 'none'"> {{data.FloorName}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="CategoryName">
+            <th mat-header-cell *matHeaderCellDef> Category Name </th>
+            <td mat-cell *matCellDef="let data; let i = index" 
+                [attr.rowspan]="getRowSpan('CategoryName', i)"
+                [style.display]="getRowSpan('CategoryName', i) ? '' : 'none'"> {{data.CategoryName}} </td>
+          </ng-container>
+        
+
+        <ng-container matColumnDef="TariffPerDay">
+          <th mat-header-cell *matHeaderCellDef> Tariff PerDay </th>
+          <td mat-cell *matCellDef="let data"> {{data.TariffPerDay}} </td>
+        </ng-container>
+
+
+        <ng-container matColumnDef="NoofRooms">
+            <th mat-header-cell *matHeaderCellDef> Noof Item </th>
+            <td mat-cell *matCellDef="let data; let i = index" 
+                [attr.rowspan]="getRowSpan('NoofRooms', i)"
+                [style.display]="getRowSpan('NoofRooms', i) ? '' : 'none'"> {{data.NoofRooms}} </td>
+          </ng-container>
+        
+        <ng-container matColumnDef="RoomName">
+            <th mat-header-cell *matHeaderCellDef> SeatItem Name </th>
+            <td mat-cell *matCellDef="let data"> {{data.RoomName}} </td>
+          </ng-container>
+
+          <ng-container matColumnDef="AmenityDescription">
+            <th mat-header-cell *matHeaderCellDef> Amenity </th>
+            <td mat-cell *matCellDef="let data; let i = index" 
+                [attr.rowspan]="getRowSpan('AmenityDescription', i)"
+                [style.display]="getRowSpan('AmenityDescription', i) ? '' : 'none'"> {{data.AmenityDescription}} </td>
+          </ng-container>
+
+
+          <ng-container matColumnDef="Action">
+            <th mat-header-cell *matHeaderCellDef> Action </th>
+            <td mat-cell *matCellDef="let data; let i = index" 
+                [attr.rowspan]="getRowSpan('Action', i)"
+                [style.display]="getRowSpan('Action', i) ? '' : 'none'"> 
+                <button mat-icon-button class="button_Edit" [routerLink]="['/master/addseats/' + data.SeatUId]">
+                    <i class="fa fa-edit color" title="Edit"></i>
+                     </button>&nbsp;&nbsp; 
+            </td>
+          </ng-container>
+
+
+        
+      
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+  
+  <br>
+  <div class="text-center  equlist" *ngIf="this.SeatsCount===0" 
+  style="background: white;height: 35px;color:red">
+  <span>No Records Found...</span>
+  </div>
+  <!-- <mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center;width: 100%;">
+    <mat-progress-spinner 
+      color="#06798cf0" 
+      mode="indeterminate"
+      diameter="30"
+      strokeWidth="50">
+    </mat-progress-spinner>
+  </mat-card> -->
+  </div>
+  
+  </div>            
+  </div>
+  </form>
+  

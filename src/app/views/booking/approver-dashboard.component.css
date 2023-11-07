@@ -1,0 +1,51 @@
+p {
+    font-family: Lato;
+  }
+  
+  .example-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 350px;
+    /* min-width: 300px; */
+    overflow-y :auto ;
+    overflow-x :auto ;
+  }
+  
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+  .mat-header-cell {
+    font-weight: 550;
+    background-color: #46a9c6;
+    text-transform: capitalize;
+    color: white;
+    font-size: 15px;
+    font-family: "Roboto", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+}
+mat-header-row {
+    min-height: 32px;
+}
+
+mat-row, mat-footer-row {
+  min-height: 35px;
+}
+  
+button.is-green {
+    background: green;
+    font-size: 13px;
+    color: white;
+    border-radius: 7px;
+    padding: 7px;
+  }
+  button.is-blue {
+    background: red;
+    font-size: 13px;
+    color: white;
+    border-radius: 7px;
+    padding: 7px;
+  }
+
+  .mat-table-sticky:last-child {
+    border-left: 1px solid #e0e0e0;
+  }

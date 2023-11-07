@@ -1,0 +1,264 @@
+<breadcrumb></breadcrumb>
+  <div class="row" style="background-color: white;">
+    <div class="col-md-12">
+    
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="info">
+                    <table style="width: 100%; width: 100%;
+                    border-left-color: #17a2b8;
+                    border-left-style: solid;
+                    border-width: 5px">
+                      <tr><td>
+              <circle-progress
+              [percent]="TotalBookingsper"
+              [radius]="30"
+              [showSubtitle]=false
+              [titleFontSize]="11"
+              [outerStrokeWidth]="3"
+              [innerStrokeWidth]="2"
+              [titleColor]="'#2f9fd4'"
+              [unitsColor]="'#2f9fd4'"
+              [outerStrokeColor]="'#2f9fd4'"
+              [innerStrokeColor]="'#8ab0f2'"
+              [animation]="true"
+              [animationDuration]="300"
+            ></circle-progress>
+            </td>
+                    <td>Total Bookings <strong class="h4" style="color:#2f9fd4;text-align: center;">{{TotalBookings}}</strong></td>
+                    </table>
+                  </div>
+                </div><!--/.col-->
+                <div class="col-sm-6">
+                  <div class="callout callout-success">
+                    <table style="width: 100%;;
+                    border-left-color: green;
+                    border-left-style: solid;
+                    border-width: 5px;">
+                      <tr><td>
+              <circle-progress
+              [percent]="Approvedper"
+              [radius]="30"
+              [showSubtitle]=false
+              [titleFontSize]="11"
+              [outerStrokeWidth]="3"
+              [innerStrokeWidth]="2"
+              [titleColor]="'#78C000'"
+              [unitsColor]="'#78C000'"
+              [outerStrokeColor]="'#78C000'"
+              [innerStrokeColor]="'#C7E596'"
+              [animation]="true"
+              [animationDuration]="300"
+            ></circle-progress>
+            </td>
+                    <td>Approved&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <strong class="h4" style="color:#78C000;text-align: center;">{{Approved}}</strong></td>
+                    </table>
+                  </div>
+                </div><!--/.col-->
+              </div><!--/.row-->
+              <hr class="mt-0">
+             
+              
+            </div><!--/.col-->
+            <div class="col-sm-6">
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="callout callout-warning">
+                    <table style="width: 100%; border-left-color: orange;
+                    border-left-style: solid;
+                    border-width: 5px;">
+                      <tr><td>
+              <circle-progress
+              [percent]="pendingPer"
+              [radius]="30"
+              [showSubtitle]=false
+              [titleFontSize]="11"
+              [outerStrokeWidth]="3"
+              [innerStrokeWidth]="2"
+              [titleColor]="'#ffc107'"
+              [unitsColor]="'#ffc107'"
+              [outerStrokeColor]="'#ffc107'"
+              [innerStrokeColor]="'#f7f681'"
+              [animation]="true"
+              [animationDuration]="300"
+            ></circle-progress>
+            </td>
+                    <td>Pending&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <strong class="h4" style="color:#ffc107;text-align: center;">{{Pending}}</strong></td>
+                    </table>
+                   
+                  </div>
+                </div><!--/.col-->
+                <div class="col-sm-6">
+                  <div class="callout callout-danger">
+                    <table style="width: 100%; border-left-color: red;
+                    border-left-style: solid;
+                    border-width: 5px;">
+                      <tr><td>
+              <circle-progress
+              [percent]="Rejectedpre"
+              [radius]="30"
+              [showSubtitle]=false
+              [titleFontSize]="11"
+              [outerStrokeWidth]="3"
+              [innerStrokeWidth]="2"
+              [titleColor]="'#d94221'"
+              [unitsColor]="'#d94221'"
+              [outerStrokeColor]="'#d94221'"
+              [innerStrokeColor]="'#f76140'"
+              [animation]="true"
+              [animationDuration]="300"
+            ></circle-progress>
+            </td>
+                    <td>Rejected&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <strong class="h4" style="color:#d94221;text-align: center;">{{Rejected}}</strong></td>
+                    </table>
+                  </div>
+                </div><!--/.col-->
+              </div><!--/.row-->
+              <hr class="mt-0">
+        
+            </div><!--/.col-->
+          </div><!--/.row-->
+          <br>
+         
+        <!-- </div> -->
+      <!-- </div> -->
+    </div><!--/.col-->
+  </div><!--/.row-->
+  
+  
+  
+  <div class="row" style="margin-top: -31px;">    
+    <div class="col-sm-12">
+      <form [formGroup]="CityForm" id="CityForm">
+      <div class="card">
+        <div class="card-header" style="background-color: #17a2b8;
+        color: #f0f3f5;
+        line-height: 0px;">
+          <h2>User Page</h2> 
+        </div>
+        <div class="card-body">
+        
+            <div class="row">
+           
+              <div class="form-group col-sm-4">
+               
+                <mat-form-field class="example-full-width">
+                  <mat-label>From date</mat-label>
+                  <input matInput [matDatepicker]="picker" [min]="todayDate" formControlName="FromDate" readonly>
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                  <mat-error  *ngIf="formHasError('FromDate', 'required')">
+                    From Date is required
+                  </mat-error>
+                </mat-form-field>
+                <!-- <input  placeholder="From Time" style="width: 100px;" (change)="hourSelected($event)"
+                [ngxTimepicker]="min" [min]="'9:00 am'" [max]="'6:00 pm'" readonly>
+            <ngx-material-timepicker [hoursOnly]="true"  #min></ngx-material-timepicker> -->
+          
+            <mat-form-field class="toggle-example" style="width: 120px">
+              <input matInput placeholder="From Time"  [ngxTimepicker]="min" [format]=24 formControlName="BookFromTime" 
+               name="time" [min]="'9:00 am'" [max]="'6:00 pm'" 
+               [format]="24" [disableClick]="true" readonly>
+              <ngx-material-timepicker-toggle matSuffix [for]="min"></ngx-material-timepicker-toggle>
+              <ngx-material-timepicker [hoursOnly]="true"    #min></ngx-material-timepicker>
+              <mat-error  *ngIf="formHasError('BookFromTime', 'required')">
+                From Time is required
+              </mat-error>
+            </mat-form-field>
+          
+              </div>
+  
+          
+              <!-- test -->
+  
+              <div class="form-group col-sm-4 time-range-example">  
+                <mat-form-field class="example-full-width">
+                  <mat-label>To date</mat-label>
+                  <input matInput [matDatepicker]="picker1" [min]="todayDate" formControlName="ToDate" readonly>
+                  <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  <mat-datepicker #picker1></mat-datepicker>
+                  <mat-error  *ngIf="formHasError('ToDate', 'required')">
+                    Select To Date  is required
+                  </mat-error>
+                </mat-form-field>
+                <mat-form-field class="toggle-example" style="width: 120px">
+                  <input matInput placeholder="To Time"  [ngxTimepicker]="max" [format]=24 formControlName="BookToTime" 
+                   name="time" [min]="'9:00 am'" [max]="'6:00 pm'" 
+                   [format]="24" [disableClick]="true" readonly>
+                  <ngx-material-timepicker-toggle matSuffix [for]="max"></ngx-material-timepicker-toggle>
+                  <ngx-material-timepicker [hoursOnly]="true"    #max></ngx-material-timepicker>
+                  <mat-error  *ngIf="formHasError('BookToTime', 'required')">
+                    ToTime is required
+                  </mat-error>
+                </mat-form-field>
+          
+              </div>
+  
+              <!-- <div class="form-group col-sm-3">     
+              <mat-form-field class="example-full-width">
+                <mat-label>Time Slot</mat-label>
+                <mat-select  [(value)]="selected" formControlName="TimeSlot">
+                  <mat-option>None</mat-option>
+                  <mat-option *ngFor="let Timeslot of Timeslot_List" [value]="Timeslot">
+                    {{ Timeslot }}
+                  </mat-option>
+                </mat-select>
+                <mat-error  *ngIf="formHasError('TimeSlot', 'required')">
+                  Select TimeSlot  is required
+                </mat-error>
+              </mat-form-field>
+              </div> -->
+  
+              <div class="form-group col-sm-2">     
+                <mat-form-field class="example-full-width1">
+                  <mat-label>Types</mat-label>
+                  <mat-select  [(value)]="selected2" formControlName="Typeroom">
+                    <mat-option>None</mat-option>
+                    <mat-option *ngFor="let Typeroom of TypeofMeeting_List" [value]="Typeroom">
+                      {{ Typeroom }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error  *ngIf="formHasError('Typeroom', 'required')">
+                    Select Type of Room  is required
+                  </mat-error>
+                </mat-form-field>
+              </div>
+                <div class="form-group col-sm-2">  
+                <mat-form-field class="example-full-width1">
+                  <mat-label>Parking</mat-label>
+                  <mat-select  [(value)]="selected3" formControlName="CarParking">
+                    <mat-option>None</mat-option>
+                    <mat-option *ngFor="let caritem of carparking_List" [value]="caritem">
+                      {{ caritem }}
+                    </mat-option>
+                  </mat-select>
+                 
+                </mat-form-field>
+                </div>
+            </div>
+         
+        </div>
+        <div class="card-footer">
+            <table style="float: right;">
+                <tr>
+                    <td>  <button type="submit" class="btn btn-sm btn-success" (click)="Post_City();"><i class="fa fa-dot-circle-o"></i> Submit</button></td>
+                    <td>  <button type="reset" class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Cancel</button></td>
+                </tr>
+            </table>
+        
+        
+        </div>
+      </div>
+    </form>
+    </div>
+  
+  </div>
+  
+  
+  
+  

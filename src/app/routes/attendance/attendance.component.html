@@ -1,0 +1,143 @@
+<breadcrumb></breadcrumb>
+<br>
+<form class="form-horizontal form-material" id="AttendanceForm" 
+[formGroup]="AttendanceForm">
+<div class="row" style="margin-top: 10px;background-color: white;">
+    <div class="col-12">
+<div class="parent" >
+  <div class="div1"><h2>Attendance List</h2> </div>
+  <div class="div2">     <mat-form-field class="search-box">
+    <mat-icon matSuffix >search</mat-icon>
+<input matInput  type="text" placeholder="Search" [formControl]="searchText" autocomplete="off" matInput />
+<!-- <i id="filtersubmit" class="fa fa-search"></i> -->
+<button mat-button *ngIf="searchText.value" matSuffix mat-icon-button aria-label="Clear"
+  (click)="searchText.patchValue('')" title="Clear">
+  <mat-icon>close</mat-icon>
+</button>
+</mat-form-field> </div>
+  <div class="div3"> 
+    <mat-form-field class="example-full-width">
+      <input matInput [matDatepicker]="picker" placeholder="Select Date"  formControlName="FromDate"
+      (dateChange)="addEvent($event)"  [max]="E_maxDate"/>
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+      
+    </mat-form-field>
+  </div>
+  <div class="div4">
+    <button class="btn btn-block btn-info active" mat-icon-button matSuffix (click)="Refersh_attendance()"
+    matTooltip="Refresh "  matTooltipPosition="above"
+    style="height: 40px;
+    border-radius: 8px;">
+     <i class="fa fa-refresh" aria-hidden="true" ></i>
+  </button>
+   </div>
+  </div>
+  </div>
+  </div>
+
+
+
+<br>
+<div class="row" style="margin-top: -69px;">
+<div class="col-12">
+<div class="example-container">
+<mat-table #table [dataSource]="dataSource" matSort class="table">
+
+
+  <!-- <ng-container matColumnDef="AttId">
+    <mat-header-cell *matHeaderCellDef class="mat-header" fxFlex="10"> AttId </mat-header-cell>
+    <mat-cell *matCellDef="let element" fxFlex="10"> {{element.AttId}} </mat-cell>
+  </ng-container> -->
+
+  <!-- Weight Column -->
+  <!-- <ng-container matColumnDef="CompName">
+    <mat-header-cell *matHeaderCellDef class="mat-header"> Company  </mat-header-cell>
+    <mat-cell *matCellDef="let element">
+    {{element.CompName}}  </mat-cell>
+  </ng-container> -->
+
+  <ng-container matColumnDef="UserCode">
+    <mat-header-cell *matHeaderCellDef class="mat-header" fxFlex="15"> Employee Code </mat-header-cell>
+    <mat-cell *matCellDef="let element" fxFlex="15"> {{element.UserCode}} </mat-cell>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="LocName">
+    <mat-header-cell *matHeaderCellDef class="mat-header" fxFlex="15"> Loction </mat-header-cell>
+    <mat-cell *matCellDef="let element" fxFlex="15"> {{element.LocName}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="BuildingName">
+    <mat-header-cell *matHeaderCellDef class="mat-header" fxFlex="15"> Building </mat-header-cell>
+    <mat-cell *matCellDef="let element" fxFlex="15"> {{element.BuildingName | titlecase }} </mat-cell>
+  </ng-container>
+  
+  <ng-container matColumnDef="FloorName">
+    <mat-header-cell *matHeaderCellDef class="mat-header" fxFlex="15"> Floor </mat-header-cell>
+    <mat-cell *matCellDef="let element" fxFlex="15"> {{element.FloorName}} </mat-cell>
+  </ng-container>
+
+ 
+
+  <ng-container matColumnDef="INTime">
+    <mat-header-cell *matHeaderCellDef class="mat-header" title="INTime"> IN-Time </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.INTime | date :'hh:mm a'}} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="InLocation">
+    <mat-header-cell *matHeaderCellDef class="mat-header" title="InLocation" fxFlex="9"> In-Map </mat-header-cell>
+    <mat-cell *matCellDef="let row; let element" fxFlex="9">
+      <button mat-icon-button class="button_Edit" (click)="openDialog_viewMap(element.INGeoLocation)" style="margin-top: -21px;">
+     <i class="fa fa-street-view" title="InMap" style="font-size: 27px;
+     color: #28a745;"></i>
+     <span class="material-icons" style="color: #28a745;">
+      arrow_downward
+      </span>
+      </button>&nbsp;&nbsp; </mat-cell>
+  </ng-container>
+
+
+  
+  <ng-container matColumnDef="OUTTime">
+    <mat-header-cell *matHeaderCellDef class="mat-header" title="INTime"> Out-Time </mat-header-cell>
+    <mat-cell *matCellDef="let element"> {{element.OUTTime | date :'hh:mm a'}} </mat-cell>
+  </ng-container>
+
+
+  <ng-container matColumnDef="OutLocation">
+    <mat-header-cell *matHeaderCellDef class="mat-header" title="OutLocation" fxFlex="9">  Out-Map </mat-header-cell>
+    <mat-cell *matCellDef="let row; let element" fxFlex="9">
+      <button mat-icon-button class="button_Edit" (click)="openDialog_viewMapout(element.OUTGeoLocation)" style="margin-top: -21px;">
+     <i class="fa fa-street-view" title="OutMap" style="font-size: 27px;
+     color: blue;"></i>
+      <span class="material-icons" style="color: blue;">
+        arrow_upward
+        </span>
+      </button>&nbsp;&nbsp; </mat-cell>
+  </ng-container>
+
+ 
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+
+<br>
+<div class="text-center  equlist" *ngIf="this.attendanceCount===0" 
+style="background: white;height: 35px;color:red">
+<span>No Records Found...</span>
+</div>
+<mat-card *ngIf="isLoading" style="display: flex; justify-content: center; align-items: center;width: 100%;">
+  <mat-progress-spinner 
+    color="#06798cf0" 
+    mode="indeterminate"
+    diameter="30"
+    strokeWidth="50">
+  </mat-progress-spinner>
+</mat-card>
+</div>
+
+</div>            
+</div>
+</form>

@@ -1,0 +1,110 @@
+
+<breadcrumb></breadcrumb>
+<div class="row">    
+  <div class="col-sm-12">
+    <form [formGroup]="AddUserForm" id="AddUserForm">
+    <div class="card">
+      <div class="card-header" style="background-color: #17a2b8;
+      color: #f0f3f5;
+      line-height: 0px;">
+        <h2>User</h2> 
+      </div>
+      <div class="card-body">
+          <div class="row">
+         
+            
+                  <mat-form-field class="col-3 example-full-width">
+                    <input autocomplete="off" matInput placeholder="Compnay Name" formControlName="CompanyName" autocomplete="off" />
+                    <mat-error  *ngIf="formHasError('CompanyName', 'required')">
+                      Company Name is required
+                    </mat-error>
+                  </mat-form-field>
+
+               
+                  <mat-form-field class=" col-3 example-full-width">
+                      <input matInput placeholder="Website" formControlName="Website" autocomplete="off"/>
+                      <mat-error  *ngIf="formHasError('Website', 'required')">
+                        website is required
+                      </mat-error>
+                    </mat-form-field>
+
+                    <mat-form-field class="col-3 example-full-width">
+                      <input autocomplete="off" matInput placeholder="Company Contact Person" formControlName="CompContactPerson" autocomplete="off" />
+                      <mat-error  *ngIf="formHasError('CompContactPerson', 'required')">
+                          Contact Person is required
+                      </mat-error>
+                    </mat-form-field>
+               
+
+                <mat-form-field class="example-full-width" class="col-3">
+                  <input autocomplete="off" matInput placeholder="Company EmailId" formControlName="CompEmail"  />
+                 <mat-error  *ngIf="formHasError('CompEmail', 'required')">
+                        Email Id is required
+                      </mat-error>
+                      <mat-error *ngIf="formHasError('CompEmail', 'pattern')">
+                        Please enter valid Email
+                      </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="example-full-width" class="col-3">
+                  <input autocomplete="off" matInput placeholder="Company MobileNo" formControlName="CompContactNo"   type="number" onKeyPress="if(this.value.length==10) return false;" />
+                  <mat-error  *ngIf="formHasError('CompContactNo', 'required')">
+                    Mobile No is required
+                  </mat-error>
+                  <mat-error *ngIf="formHasError('CompContactNo', 'pattern')">
+                    Should be 10 digit
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="col-3 example-full-width">
+                  <input autocomplete="off" matInput placeholder="Cont EmpId" formControlName="ContEmpId" autocomplete="off" />                   
+                </mat-form-field>
+
+                <mat-form-field class="col-3 example-full-width">
+                  <input autocomplete="off" matInput placeholder="Max CapSize" formControlName="MaxCapSize" autocomplete="off" />
+                </mat-form-field>
+
+                <mat-form-field class="col-3 example-full-width">
+                  <input matInput [matDatepicker]="picker" autocomplete="off" 
+                  [min]="minDate" [max]="maxDate"  placeholder="Effective Date" formControlName="CompEffDate" readonly />
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+
+
+                <mat-form-field class="col-3 example-full-width">
+                  <mat-label>Effective Status</mat-label>
+                  <mat-select formControlName="CompEffStat" [(value)]="selected1">
+                    <mat-option>None</mat-option>
+                    <mat-option *ngFor="let EffectiveStatus of EffectiveStatus_List" [value]="EffectiveStatus">
+                      {{ EffectiveStatus }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error>
+                      Effective Status is required
+                  </mat-error>
+                </mat-form-field>
+              
+       
+          </div>
+      </div>
+      <div class="card-footer">
+          <table style="float: right;">
+              <tr>
+                  <td>  <button type="submit" class="btn btn-sm btn-success" (click)="Post_Company();"><i class="fa fa-dot-circle-o"></i>
+                      {{ this.CompanyId !== 0 ? 'Update' : 'Save' }}</button></td>
+                  <td>  <button type="button" [routerLink]="['/users']" 
+                      class="btn btn-sm btn-danger"><i class="fa fa-ban"></i> Cancel</button></td>
+              </tr>
+          </table>
+      
+      
+      </div>
+    </div>
+  </form>
+  </div>
+
+</div>
+
+
+

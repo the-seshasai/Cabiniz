@@ -1,0 +1,52 @@
+
+<div class="animated fadeIn">
+   
+  <div class="row">
+      <div class="col-sm-12">
+        <div class="card">
+          <div class="card-header" style="background-color: #17a2b8ed;
+          color: white;">
+          <table style="width: 100%;" >
+            <tr>
+              <td><h2 style="font-size: 16px;">View Map</h2> </td>
+              <td>
+                <button type="button"  mat-dialog-close style="margin-left: -42px;
+                border-radius: 32px;"
+                        class="btn btn-sm btn-danger">
+                        <span class="material-icons">
+                          close
+                          </span>
+                      </button>
+                
+              </td>
+            </tr>
+          </table>
+            
+          </div>
+          <div class="card-body">
+            <div class="row" *ngIf="mapflagView=='In'">
+              <div class="col-12">
+                <h2>IN- (latitude:{{inlatitude}} , longitude:{{inlongitude}} )</h2>
+              </div>
+            </div>
+            <div class="row" *ngIf="mapflagView=='Out'">
+              <div class="col-12">
+
+                <h2>OUT- (latitude:{{outlatitude}} , longitude:{{outlongitude}}) </h2>
+              </div>
+            </div>
+
+            <iframe class="e2e-iframe-trusted-src"
+            width="100%" 
+            height="100%" 
+            frameborder="0" 
+            style="border:0" 
+            [src]="trustedUrl"></iframe>
+
+
+          </div>
+        </div>
+      </div>
+  </div>
+</div>
+
